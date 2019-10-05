@@ -138,7 +138,7 @@ def Selected (matriz, x, y, p1, p2):
                             y = y -1
                             MontaMatriz(matriz, x, y, p1, p2)
                 elif(ord(c) == 115): #s
-                    if(y != 0):
+                    if(x != 6):
                         if(matriz[x+1][y] == "|"):
                             posicionado = 0
                             while(posicionado == 0):
@@ -150,7 +150,7 @@ def Selected (matriz, x, y, p1, p2):
                             x += 1
                             MontaMatriz(matriz, x, y, p1, p2)
                 elif(ord(c) == 100): #d
-                    if(y != 0):
+                    if(y != 6):
                         if(matriz[x][y+1] == "-"):
                             posicionado = 0
                             while(posicionado == 0):
