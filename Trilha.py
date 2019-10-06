@@ -58,6 +58,10 @@ def PrintMatriz(matriz):
 		for j in range (len(matriz[0])):
 			print(matriz[i][j], end = "")
 		print("")
+
+def Help():
+    print("\n\nAqui era pra ter um tutorial do jogo e como mexer né. Mas preguiça. Então descubra. Boa sorte aventureiro.\nAgora da um enter ai")
+    input()
         
 def MontaTabuleiro (matriz, p1, p2):
 	#matriz 7x7
@@ -97,12 +101,12 @@ def MontaMatriz(matriz, x, y, p1, p2): #Monta pra colocar no Tabuleiro
     MontaTabuleiro(tabuleiro, p1, p2)
             
 
-def Selected (matriz, x, y, p1, p2):
+def Selected (matriz, x, y, p1, p2, string): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
     if __name__ == "__main__":
         
         kb = KBHit()
-
-        print('Use WASD para mover')
+        MontaMatriz(matriz, x, y, p1, p2)
+        print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
 
         hit = 0
         enter = 0
@@ -115,68 +119,75 @@ def Selected (matriz, x, y, p1, p2):
                     enter = 1
                 elif(ord(c) == 119): #w
                     if(x != 0):
-                        if(matriz[x-1][y] == "|"):
+                        if(matriz[x-1][y] == "|"): #Distancia grande entre as casas
                             posicionado = 0
                             while(posicionado == 0):
                                 x = x -1
-                                if(matriz[x][y] == " "): #Tem que colocar x e o nesses if todo
+                                if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")): #Tem que colocar x e o nesses if todo
                                     posicionado = 1
                             MontaMatriz(matriz, x, y, p1, p2)
-                        elif(matriz[x-1][y] == " "):
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                        elif((matriz[x-1][y] == " ") or (matriz[x-1][y] == "X") or (matriz[x-1][y] == "O")):
                             x = x -1
                             MontaMatriz(matriz, x, y, p1, p2)
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
                 elif(ord(c) == 97): #a
                     if(y != 0):
                         if(matriz[x][y-1] == "-"):
                             posicionado = 0
                             while(posicionado == 0):
                                 y = y -1
-                                if(matriz[x][y] == " "):
+                                if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                                     posicionado = 1
                             MontaMatriz(matriz, x, y, p1, p2)
-                        elif(matriz[x][y - 1] == " "):
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                        elif((matriz[x][y-1] == " ") or (matriz[x][y-1] == "X") or (matriz[x][y-1] == "O")):
                             y = y -1
                             MontaMatriz(matriz, x, y, p1, p2)
+                            print(string, '\n Use WASD para mover, espaço para confirmar e ? para tirar as duvidas')
                 elif(ord(c) == 115): #s
                     if(x != 6):
                         if(matriz[x+1][y] == "|"):
                             posicionado = 0
                             while(posicionado == 0):
                                 x += 1
-                                if(matriz[x][y] == " "):
+                                if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                                     posicionado = 1
                             MontaMatriz(matriz, x, y, p1, p2)
-                        elif(matriz[x+1][y] == " "):
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                        elif((matriz[x+1][y] == " ") or (matriz[x+1][y] == "X") or (matriz[x+1][y] == "O")):
                             x += 1
                             MontaMatriz(matriz, x, y, p1, p2)
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
                 elif(ord(c) == 100): #d
                     if(y != 6):
                         if(matriz[x][y+1] == "-"):
                             posicionado = 0
                             while(posicionado == 0):
                                 y = y + 1
-                                if(matriz[x][y] == " "):
+                                if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                                     posicionado = 1
                             MontaMatriz(matriz, x, y, p1, p2)
-                        elif(matriz[x][y+1] == " "):
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                        elif((matriz[x][y+1] == " ") or (matriz[x][y+1] == "X") or (matriz[x][y+1] == "O")):
                             y = y + 1
                             MontaMatriz(matriz, x, y, p1, p2)
+                            print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                elif(ord(c) == 63):
+                    Help()
+                    MontaMatriz(matriz, x, y, p1, p2)
+                    print(string, '\nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas')
+                    
                 
-                    #or (ord(c) == 97) or (ord(c) == 115) or (ord(c) ==100)): # WASD
+        coordenadas = []
+        coordenadas.append(x)
+        coordenadas.append(y)
+        return coordenadas
                   
-    
-	
-	
 def main():
 	matriz = [" "]*7
-	p1 = []
-	p2 = []
 	for i in range (7):
 		matriz[i] = [" "]*7
-	
-	for i in range (9):
-	    p1.append("X")
-	    p2.append("O")
 	
 	matriz[0][1] = "-"
 	matriz[0][2] = "-"
@@ -203,9 +214,42 @@ def main():
 	matriz[4][1] = "|"
 	matriz[4][5] = "|"
 	matriz[4][6] = "|"
-	MontaMatriz(matriz, 2, 3, p1, p2)
-	Selected(matriz, 2, 3, p1, p2)
-	#MontaTabuleiro(matriz, p1, p2)
-	#PrintMatriz(matriz)
+	x = 0
+	y = 3
+
+	p1 = []
+	p2 = []
+	for i in range (9):
+	    p1.append("X")
+	    p2.append("O")
+
+	    
+	Posiciona = []
+	Posiciona.append("É a vez do jogador 1. Sua peça é 'X'. Escolha onde posiciona-la")
+	Posiciona.append("É a vez do jogador 2. Sua peça é 'O'. Escolha onde posiciona-la")
+
+	for i in range (8, -1, -1):
+            jogada_valida = 0
+            coordenadas = []
+            while(jogada_valida == 0): #jogada do x
+                coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[0])
+                if(matriz[coordenadas[0]][coordenadas[1]] == " "):
+                    matriz[coordenadas[0]][coordenadas[1]] = "X"
+                    jogada_valida = 1
+                    p1[i] = " "
+                x = coordenadas[0]
+                y = coordenadas[1]
+            x = coordenadas[0]
+            y = coordenadas[1]
+            jogada_valida = 0
+            while(jogada_valida == 0): #jogada do y
+                coordenadas = []
+                coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[1])
+                if(matriz[coordenadas[0]][coordenadas[1]] == " "):
+                    matriz[coordenadas[0]][coordenadas[1]] = "O"
+                    jogada_valida = 1
+                    p2[i] = " "
+                x = coordenadas[0]
+                y = coordenadas[1]
 	
 main()
