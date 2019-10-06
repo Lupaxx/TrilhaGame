@@ -12,6 +12,7 @@ if os.name == 'nt':
 else:
     import sys
     import termios
+    TERMIOS = termios
     import atexit
     from select import select
 
@@ -62,16 +63,22 @@ def PrintMatriz(matriz):
 def Help():
     if os.name == 'nt':
         os.system('cls')
+    else:
+        os.system('clear')
     print("\n\nAqui era pra ter um tutorial do jogo e como mexer né. Mas preguiça. Então descubra. Boa sorte aventureiro.\nAgora da um enter ai")
     input()
     if os.name == 'nt':
         os.system('cls')
+    else:
+        os.system('clear')
         
 def MontaTabuleiro (matriz, p1, p2):
 	#matriz 7x7
 	#lugar de peça = 0x0 0x3 0x6 1x1 1x3 1x5 2x2 2x3 2x4 3x0 3x1 3x2 3x4 3x5 3x6 4x2 4x3 4x4 5x1 5x3 5x3 6x0 6x3 6x6
     if (os.name == 'nt'):
         os.system('cls')
+    else:
+        os.system('clear')
             
     print("            ",matriz[0][0], "----------------", matriz[0][3], "----------------", matriz[0][6], "", sep="")
     print("             |                  |                  |")
