@@ -79,7 +79,7 @@ def MontaTabuleiro (matriz, p1, p2):
     print("             |    ", matriz[1][1], "----------", matriz[1][3], "----------", matriz[1][5], "    |", sep="")
     print(" |-----|     |     |            |            |     |     |-----|", )
     print(" |  ", p1[0], "  |     |     |            |            |     |     |  ", p2[0], "  |", sep="")
-    print(" |  ", p1[1], "  |     |     |    ", matriz[2][2], "----", matriz[2][3], "----", matriz[2][4], "    |     |     |  ", p2[2], "  |", sep = "")
+    print(" |  ", p1[1], "  |     |     |    ", matriz[2][2], "----", matriz[2][3], "----", matriz[2][4], "    |     |     |  ", p2[1], "  |", sep = "")
     for i in range (2,4):
             print(" |  ", p1[i], "  |     |     |     |             |     |     |     |  ", p2[i], "  |", sep="")
     print(" |  ", p1[4], "  |    ", matriz[3][0], "---", matriz[3][1], "---", matriz[3][2], "           ", matriz[3][4], "---", matriz[3][5], "---", matriz[3][6], "    |  ", p2[4], "  |", sep="")
