@@ -13,6 +13,7 @@ else:
     import curses
     import sys
     import termios
+    TERMIOS = termios
     import atexit
     from select import select
     def getkey():
@@ -27,7 +28,6 @@ else:
             c = os.read(fd, 1)
         finally:
             return (str(c)[2])
-print(os.name)
 
 class KBHit:
 
