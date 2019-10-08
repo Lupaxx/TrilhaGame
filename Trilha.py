@@ -78,7 +78,7 @@ def Help():
         os.system('cls')
     else:	
         os.system('clear')
-    print("\n\n\tAqui era pra ter um tutorial do jogo e como mexer né. Mas preguiça. Então descubra. Boa sorte aventureiro.\nAgora da um enter ai")
+    print("\n\n     Aqui era pra ter um tutorial do jogo e como mexer né. Mas preguiça. Então descubra. Boa sorte aventureiro.\nAgora da um enter ai")
     input()
     if os.name == 'nt':
         os.system('cls')
@@ -92,8 +92,9 @@ def MontaTabuleiro (matriz, p1, p2):
         os.system('cls')
     else:	
         os.system('clear')
-        
-    print("\n                ",matriz[0][0], "----------------", matriz[0][3], "----------------", matriz[0][6], "", sep="")
+    
+    print("")
+    print("                ",matriz[0][0], "----------------", matriz[0][3], "----------------", matriz[0][6], "", sep="")
     print("                 |                  |                  |")
     print("                 |                  |                  |")
     print("                 |    ", matriz[1][1], "----------", matriz[1][3], "----------", matriz[1][5], "    |", sep="")
