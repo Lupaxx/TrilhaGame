@@ -2,6 +2,8 @@
 #Data de inicio: 04/10/2019
 #
 #Descrição: Jogo Trilha em Python
+
+#######################  Comandos Sistema Operacional  #########################
 import os
 
 # Windows
@@ -66,54 +68,68 @@ class KBHit:
         else:
             dr,dw,de = select([sys.stdin], [], [], 0)
             return dr != []
-        
-def PrintMatriz(matriz):
-	for i in range (len(matriz[0])):
-		for j in range (len(matriz[0])):
-			print(matriz[i][j], end = "")
-		print("")
 
+#################################  Tutorial  ###################################
 def Help():
     if os.name == 'nt':
         os.system('cls')
     else:	
         os.system('clear')
-    print("\n\n     Aqui era pra ter um tutorial do jogo e como mexer né. Mas preguiça. Então descubra. Boa sorte aventureiro.\nAgora da um enter ai")
+    print ('''    Tutorial:
+                                       Descrição:                                   
+    
+    O jogo de Trilha tem dois participantes, que usam um tabuleiro para jogar.
+    
+    Jogadores - 2
+    Peças - 18 peças sendo 9 brancas e 9 pretas.
+    Tabuleiro - tabuleiro com 24 casa interligados horizontalmente e verticalmente.
+    Objetivo - Deixar o adversário com 2 peças no tabuleiro ou deixá-lo sem movimentos.
+    
+                                     O Jogo Trilha:                                 
+    
+    O jogo consiste em tres partes principais:
+    
+        Colocando as peças: Esta é a fase inicial do jogo onde cada jogador coloca
+    um peça de cada vez alternando entre jogadores, caso um dos jogadores forme uma
+    linha horizontal ou vertical com três peças (um moinho), ele terá o direito de
+    remover uma peça de seu adversário do tabuleiro.
+        Movendo as peças: Esta fase se inicia quando ambos os jogadores colocarem
+    suas nove peças em jogo. Consiste em mover suas peças ao longo de uma das linhas
+    do tabuleiro para uma outra casa adjacente. Caso um dos jogadores tenha somente
+    3 peças em jogo, ele pode "voar" com suas peças, podendo mover para qualquer
+    casa que não esteja ocupada por uma peça do adversário.
+        Removendo peças adversárias: Em qualquer uma das fases acima quando um
+    jogador forma uma linha horizontal ou vertical com 3 peças ele fará um "moinho",
+    isso lhe dá o direito de remover uma peça de seu adversário, contudo você não
+    poderá remover uma peça do seu adversário que faz parte de um moinho dele, a não
+    ser que não exista outra peça para remover.
+    
+                                      Estratégia:                                   
+                                      
+        No começo do jogo, é muito importante colocar as peças nos lugares mais
+    versáteis para tentar formar imediatamente moinhos e não cometer o erro de
+    concentrar as peças próprias em uma área do tabuleiro.
+        Uma posição ideal, que geralmente resulta em uma vitória, é ser capaz de colocar
+    uma peça que possa se movimentar entre dois moinhos diferentes. 
+    
+                                     Fim da Partida:                                 
+                                     
+    O jogo termina quando 3 situações são alcançadas:
+    
+        Se um jogador reduzir as peças de seu adversário para 2.
+        Se um jogador deixar seu adversário sem nenhuma jogada válida. Caso seu
+    adversário tenha somente 3 peças em jogo, ele não poderá ser "trancado".
+        Se ambos jogadores estiverem com 3 peças em jogo e, a partir deste momento, se
+    em 10 jogadas não houver vencedor, o jogo terminará e será declarado um empate.
+    
+    ****************** Use enter para voltar ao menu inicial. ******************''')
     input()
     if os.name == 'nt':
         os.system('cls')
     else:	
         os.system('clear')
-        
-def MontaTabuleiro (matriz, p1, p2):
-	#matriz 7x7
-	#lugar de peça = 0x0 0x3 0x6 1x1 1x3 1x5 2x2 2x3 2x4 3x0 3x1 3x2 3x4 3x5 3x6 4x2 4x3 4x4 5x1 5x3 5x3 6x0 6x3 6x6
-    if (os.name == 'nt'):
-        os.system('cls')
-    else:	
-        os.system('clear')
-    
-    print("")
-    print("                ",matriz[0][0], "----------------", matriz[0][3], "----------------", matriz[0][6], "", sep="")
-    print("                 |                  |                  |")
-    print("                 |                  |                  |")
-    print("                 |    ", matriz[1][1], "----------", matriz[1][3], "----------", matriz[1][5], "    |", sep="")
-    print("     |-----|     |     |            |            |     |     |-----|", )
-    print("     |  ", p1[0], "  |     |     |            |            |     |     |  ", p2[0], "  |", sep="")
-    print("     |  ", p1[1], "  |     |     |    ", matriz[2][2], "----", matriz[2][3], "----", matriz[2][4], "    |     |     |  ", p2[1], "  |", sep = "")
-    for i in range (2,4):
-            print("     |  ", p1[i], "  |     |     |     |             |     |     |     |  ", p2[i], "  |", sep="")
-    print("     |  ", p1[4], "  |    ", matriz[3][0], "---", matriz[3][1], "---", matriz[3][2], "           ", matriz[3][4], "---", matriz[3][5], "---", matriz[3][6], "    |  ", p2[4], "  |", sep="")
-    for i in range (5,7):
-            print("     |  ", p1[i], "  |     |     |     |             |     |     |     |  ", p2[i], "  |", sep="")
-    print("     |  ", p1[7], "  |     |     |    ", matriz[4][2], "----", matriz[4][3], "----", matriz[4][4], "    |     |     |  ", p2[7], "  |", sep = "")
-    print("     |  ", p1[8], "  |     |     |            |            |     |     |  ", p2[8], "  |", sep="")
-    print("     |-----|     |     |            |            |     |     |-----|", )
-    print("                 |    ", matriz[5][1], "----------", matriz[5][3], "----------", matriz[5][5], "    |", sep="")
-    print("                 |                  |                  |")
-    print("                 |                  |                  |")
-    print("                ",matriz[6][0], "----------------", matriz[6][3], "----------------", matriz[6][6], "\n", sep="")
 
+###############################  Monta Matriz  #################################
 def MontaMatriz(matriz, x, y, p1, p2): #Monta pra colocar no Tabuleiro
     tabuleiro = [" "]*7
     for i in range (7):
@@ -124,9 +140,39 @@ def MontaMatriz(matriz, x, y, p1, p2): #Monta pra colocar no Tabuleiro
                 tabuleiro[i][j] = ">" + matriz[i][j] + "<"
             else:
                 tabuleiro[i][j] = "(" + matriz[i][j] + ")"
-    #PrintMatriz(tabuleiro)
-    MontaTabuleiro(tabuleiro, p1, p2)
-            
+    MontaTabuleiro(tabuleiro, p1, p2) #PrintMatriz(tabuleiro)
+
+##############################  Monta Tabuleiro  ###############################
+def MontaTabuleiro (matriz, p1, p2):
+	#matriz 7x7
+	#lugar de peça = 0x0 0x3 0x6 1x1 1x3 1x5 2x2 2x3 2x4 3x0 3x1 3x2 3x4 3x5 3x6 4x2 4x3 4x4 5x1 5x3 5x3 6x0 6x3 6x6
+    if (os.name == 'nt'):
+        os.system('cls')
+    else:	
+        os.system('clear')
+    
+    print("")
+    print("                  ",matriz[0][0], "----------------", matriz[0][3], "----------------", matriz[0][6], "", sep="")
+    print("                   |                  |                  |")
+    print("                   |                  |                  |")
+    print("                   |    ", matriz[1][1], "----------", matriz[1][3], "----------", matriz[1][5], "    |", sep="")
+    print("       |-----|     |     |            |            |     |     |-----|", )
+    print("       |  ", p1[0], "  |     |     |            |            |     |     |  ", p2[0], "  |", sep="")
+    print("       |  ", p1[1], "  |     |     |    ", matriz[2][2], "----", matriz[2][3], "----", matriz[2][4], "    |     |     |  ", p2[1], "  |", sep = "")
+    for i in range (2,4):
+            print("       |  ", p1[i], "  |     |     |     |             |     |     |     |  ", p2[i], "  |", sep="")
+    print("       |  ", p1[4], "  |    ", matriz[3][0], "---", matriz[3][1], "---", matriz[3][2], "           ", matriz[3][4], "---", matriz[3][5], "---", matriz[3][6], "    |  ", p2[4], "  |", sep="")
+    for i in range (5,7):
+            print("       |  ", p1[i], "  |     |     |     |             |     |     |     |  ", p2[i], "  |", sep="")
+    print("       |  ", p1[7], "  |     |     |    ", matriz[4][2], "----", matriz[4][3], "----", matriz[4][4], "    |     |     |  ", p2[7], "  |", sep = "")
+    print("       |  ", p1[8], "  |     |     |            |            |     |     |  ", p2[8], "  |", sep="")
+    print("       |-----|     |     |            |            |     |     |-----|", )
+    print("                   |    ", matriz[5][1], "----------", matriz[5][3], "----------", matriz[5][5], "    |", sep="")
+    print("                   |                  |                  |")
+    print("                   |                  |                  |")
+    print("                  ",matriz[6][0], "----------------", matriz[6][3], "----------------", matriz[6][6], "\n", sep="")
+
+#################################  Move seta  ##################################
 def Move(matriz, x, y, p1, p2, string, c, enter):
     if (ord(c) == 32): #espaço -> enter
         enter = 1
@@ -186,7 +232,7 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
                 y = y + 1
                 MontaMatriz(matriz, x, y, p1, p2)
                 print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
-    elif(ord(c) == 63):
+    elif(ord(c) == 63): #?
         Help()
         MontaMatriz(matriz, x, y, p1, p2)
         print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
@@ -196,7 +242,7 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
     coordenadas.append(enter)
     return coordenadas
                     
-
+#################################  Selected  ###################################
 def Selected (matriz, x, y, p1, p2, string): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
     if __name__ == "__main__":
         
@@ -223,7 +269,8 @@ def Selected (matriz, x, y, p1, p2, string): #Responde ao input, seleciona um lu
                 coordenadas = Move(matriz, coordenadas[0], coordenadas[1], p1, p2, string, c, coordenadas[2])
                 
         return coordenadas
-                  
+
+###################################  Main  #####################################
 def main():
     matriz = [" "]*7
     for i in range (7):
@@ -293,5 +340,10 @@ def main():
             y = coordenadas[1]
                 
     MontaMatriz(matriz, x, y, p1, p2)
-	
+
+###################################  Menu  #####################################
+
+    
+
+###############################  Chama Main  #################################
 main()
