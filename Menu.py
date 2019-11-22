@@ -70,6 +70,7 @@ class KBHit:
             return dr != []
 
 ####################################### Menu ###################################
+
 def Menu():
     vetor_menu = []
     vetor_menu.append ('Iniciar Jogo')
@@ -116,7 +117,7 @@ def MoveMenu(vetor_menu, x, c, enter):
         enter = 1
     elif(ord(c) == 119): #w
         if(x != 0):
-            x = x -1
+            x -= 1
             MontaMenu(vetor_menu, x)
     elif(ord(c) == 115): #s
         if(x != 2):
@@ -135,20 +136,19 @@ def SelectedMenu (vetor_menu, x): #Responde ao input, seleciona um lugar do tabu
         hit = 0
         enter = 0
         
-        coordenadas = x
         z=0
         if(os.name == 'nt'):
             while (z == 0):
                 if os.name == 'nt':
                     if kb.kbhit():
                         c = kb.getch()
-                        coordenadas = MoveMenu(vetor_menu, x, c, z)
+                        x = MoveMenu(vetor_menu, x, c, z)
         else:
             while (z == 0):
                 c = getkey()
-                coordenadas = MoveMenu(vetor_menu, x, c, z)
+                x = MoveMenu(vetor_menu, x, c, z)
                 
-        return coordenadas
+        return x
 
 ################################  Chama menu  ##################################
 
