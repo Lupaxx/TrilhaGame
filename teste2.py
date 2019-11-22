@@ -1,3 +1,5 @@
+#Código original: https://github.com/NU-MSR/overhead_mobile_tracker/blob/master/src/kbhit.py
+
 import os
 
 # Windows
