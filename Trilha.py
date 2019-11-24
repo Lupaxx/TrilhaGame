@@ -5,124 +5,15 @@
 
 #######################  Comandos Sistema Operacional  #########################
 import os
-
-# Windows
-if os.name == 'nt':
-    import msvcrt
-
-# Posix (Linux, OS X)
-else:
-    import curses
-    import sys
-    import termios
-    TERMIOS = termios
-    import atexit
-    from select import select
-    def getkey():
-        fd = sys.stdin.fileno()
-        new = termios.tcgetattr(fd)
-        new[3] = new[3] & ~TERMIOS.ICANON & ~TERMIOS.ECHO
-        new[6][TERMIOS.VMIN] = 1
-        new[6][TERMIOS.VTIME] = 0
-        termios.tcsetattr(fd, TERMIOS.TCSANOW, new)
-        c = None
-        try:
-            c = os.read(fd, 1)
-        finally:
-            return (str(c)[2])
-
-class KBHit:
-
-    def set_normal_term(self):
-        ''' Resets to normal terminal.  On Windows this is a no-op.
-        '''
         
-        if os.name == 'nt':
-            pass
-        
-        else:
-            termios.tcsetattr(self.fd, termios.TCSAFLUSH, self.old_term)
-
-
-
-    def getch(self):
-        ''' Returns a keyboard character after kbhit() has been called.
-            Should not be called in the same program as getarrow().
-        '''
-        
-        s = ''
-        
-        if os.name == 'nt':
-            return msvcrt.getch().decode('utf-8')
-        
-        else:
-            return sys.stdin.read(1)
-    
-
-    def kbhit(self):
-        ''' Returns True if keyboard character was hit, False otherwise.
-        '''
-        if os.name == 'nt':
-            return msvcrt.kbhit()
-        
-        else:
-            dr,dw,de = select([sys.stdin], [], [], 0)
-            return dr != []
-
 #################################  Tutorial  ###################################
 def Help():
     if os.name == 'nt':
         os.system('cls')
     else:	
         os.system('clear')
-    print ('''    Tutorial:
-                                       Descrição:                                   
-    
-    O jogo de Trilha tem dois participantes, que usam um tabuleiro para jogar.
-    
-    Jogadores - 2
-    Peças - 18 peças sendo 9 brancas e 9 pretas.
-    Tabuleiro - tabuleiro com 24 casa interligados horizontalmente e verticalmente.
-    Objetivo - Deixar o adversário com 2 peças no tabuleiro ou deixá-lo sem movimentos.
-    
-                                     O Jogo Trilha:                                 
-    
-    O jogo consiste em tres partes principais:
-    
-        Colocando as peças: Esta é a fase inicial do jogo onde cada jogador coloca
-    um peça de cada vez alternando entre jogadores, caso um dos jogadores forme uma
-    linha horizontal ou vertical com três peças (um moinho), ele terá o direito de
-    remover uma peça de seu adversário do tabuleiro.
-        Movendo as peças: Esta fase se inicia quando ambos os jogadores colocarem
-    suas nove peças em jogo. Consiste em mover suas peças ao longo de uma das linhas
-    do tabuleiro para uma outra casa adjacente. Caso um dos jogadores tenha somente
-    3 peças em jogo, ele pode "voar" com suas peças, podendo mover para qualquer
-    casa que não esteja ocupada por uma peça do adversário.
-        Removendo peças adversárias: Em qualquer uma das fases acima quando um
-    jogador forma uma linha horizontal ou vertical com 3 peças ele fará um "moinho",
-    isso lhe dá o direito de remover uma peça de seu adversário, contudo você não
-    poderá remover uma peça do seu adversário que faz parte de um moinho dele, a não
-    ser que não exista outra peça para remover.
-    
-                                      Estratégia:                                   
-                                      
-        No começo do jogo, é muito importante colocar as peças nos lugares mais
-    versáteis para tentar formar imediatamente moinhos e não cometer o erro de
-    concentrar as peças próprias em uma área do tabuleiro.
-        Uma posição ideal, que geralmente resulta em uma vitória, é ser capaz de colocar
-    uma peça que possa se movimentar entre dois moinhos diferentes. 
-    
-                                     Fim da Partida:                                 
-                                     
-    O jogo termina quando 3 situações são alcançadas:
-    
-        Se um jogador reduzir as peças de seu adversário para 2.
-        Se um jogador deixar seu adversário sem nenhuma jogada válida. Caso seu
-    adversário tenha somente 3 peças em jogo, ele não poderá ser "trancado".
-        Se ambos jogadores estiverem com 3 peças em jogo e, a partir deste momento, se
-    em 10 jogadas não houver vencedor, o jogo terminará e será declarado um empate.
-    
-    ****************** Use enter para voltar ao menu inicial. ******************''')
+    arquivo = open("tutorial.txt", "r")
+    print (arquivo.read())
     input()
     if os.name == 'nt':
         os.system('cls')
@@ -130,7 +21,7 @@ def Help():
         os.system('clear')
 
 ###############################  Monta Matriz  #################################
-def MontaMatriz(matriz, x, y, p1, p2): #Monta pra colocar no Tabuleiro
+def MontaMatriz(matriz, x, y, p1, p2, instrucoes): #Monta pra colocar no Tabuleiro
     tabuleiro = [" "]*7
     for i in range (7):
 	    tabuleiro[i] = [" "]*7
@@ -141,6 +32,7 @@ def MontaMatriz(matriz, x, y, p1, p2): #Monta pra colocar no Tabuleiro
             else:
                 tabuleiro[i][j] = "(" + matriz[i][j] + ")"
     MontaTabuleiro(tabuleiro, p1, p2) #PrintMatriz(tabuleiro)
+    print(instrucoes)
 
 ##############################  Monta Tabuleiro  ###############################
 def MontaTabuleiro (matriz, p1, p2):
@@ -173,7 +65,7 @@ def MontaTabuleiro (matriz, p1, p2):
     print("                  ",matriz[6][0], "----------------", matriz[6][3], "----------------", matriz[6][6], "\n", sep="")
 
 #################################  Move seta  ##################################
-def Move(matriz, x, y, p1, p2, string, c, enter):
+def Move(matriz, x, y, p1, p2, instrucoes, c, enter):
     if (ord(c) == 32): #espaço -> enter
         enter = 1
     elif(ord(c) == 119): #w
@@ -182,14 +74,12 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
                 posicionado = 0
                 while(posicionado == 0):
                     x = x -1
-                    if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")): #Tem que colocar x e o nesses if todo
+                    if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                         posicionado = 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
             elif((matriz[x-1][y] == " ") or (matriz[x-1][y] == "X") or (matriz[x-1][y] == "O")):
                 x = x -1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
     elif(ord(c) == 97): #a
         if(y != 0):
             if(matriz[x][y-1] == "-"):
@@ -198,12 +88,10 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
                     y = y -1
                     if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                         posicionado = 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
             elif((matriz[x][y-1] == " ") or (matriz[x][y-1] == "X") or (matriz[x][y-1] == "O")):
                 y = y -1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
     elif(ord(c) == 115): #s
         if(x != 6):
             if(matriz[x+1][y] == "|"):
@@ -212,12 +100,10 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
                     x += 1
                     if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                         posicionado = 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
             elif((matriz[x+1][y] == " ") or (matriz[x+1][y] == "X") or (matriz[x+1][y] == "O")):
                 x += 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
     elif(ord(c) == 100): #d
         if(y != 6):
             if(matriz[x][y+1] == "-"):
@@ -226,16 +112,14 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
                     y = y + 1
                     if((matriz[x][y] == " ") or (matriz[x][y] == "X") or (matriz[x][y] == "O")):
                         posicionado = 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
             elif((matriz[x][y+1] == " ") or (matriz[x][y+1] == "X") or (matriz[x][y+1] == "O")):
                 y = y + 1
-                MontaMatriz(matriz, x, y, p1, p2)
-                print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
     elif(ord(c) == 63): #?
         Help()
-        MontaMatriz(matriz, x, y, p1, p2)
-        print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+        MontaMatriz(matriz, x, y, p1, p2, instrucoes)
+
     coordenadas = []
     coordenadas.append(x)
     coordenadas.append(y)
@@ -243,32 +127,28 @@ def Move(matriz, x, y, p1, p2, string, c, enter):
     return coordenadas
                     
 #################################  Selected  ###################################
-def Selected (matriz, x, y, p1, p2, string): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
-    if __name__ == "__main__":
-        
-        kb = KBHit()
-        MontaMatriz(matriz, x, y, p1, p2)
-        print(string, '\n     Use WASD para mover, espaço para confirmar e ? para tirar as duvidas.')
+def Selected (matriz, x, y, p1, p2, instrucoes): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
+    import Kbhit
+    kb = Kbhit.KBHit()
+    MontaMatriz(matriz, x, y, p1, p2, instrucoes)
 
-        hit = 0
-        enter = 0
+    hit = 0
+    enter = 0
         
-        coordenadas = []
-        coordenadas.append(x)
-        coordenadas.append(y)
-        coordenadas.append(0)
-        if(os.name == 'nt'):
-            while (coordenadas[2] == 0):
-                if os.name == 'nt':
-                    if kb.kbhit():
-                        c = kb.getch()
-                        coordenadas = Move(matriz, coordenadas[0], coordenadas[1], p1, p2, string, c, coordenadas[2])
-        else:
-            while (coordenadas[2] == 0):
-                c = getkey()
-                coordenadas = Move(matriz, coordenadas[0], coordenadas[1], p1, p2, string, c, coordenadas[2])
-                
-        return coordenadas
+    coordenadas = []
+    coordenadas.append(x)
+    coordenadas.append(y)
+    coordenadas.append(0)
+    if(os.name == 'nt'):
+        while (coordenadas[2] == 0):
+            if kb.kbhit():
+                c = kb.getch()
+                coordenadas = Move(matriz, coordenadas[0], coordenadas[1], p1, p2, instrucoes, c, coordenadas[2])
+    else:
+        while (coordenadas[2] == 0):
+            c = getkey()
+            coordenadas = Move(matriz, coordenadas[0], coordenadas[1], p1, p2, instrucoes, c, coordenadas[2])
+    return (coordenadas)
 
 ###################################  Main  #####################################
 def main():
@@ -306,24 +186,27 @@ def main():
 
     p1 = []
     p2 = []
-    for i in range (9):
+    for i in range (9): #peças que faltam paara serem posicionadas
             p1.append("X")
             p2.append("O")
 
     
-    Posiciona = []
-    Posiciona.append("     É a vez do jogador 1. Sua peça é 'X'. Escolha onde posiciona-la.")
-    Posiciona.append("     É a vez do jogador 2. Sua peça é 'O'. Escolha onde posiciona-la.")
-        
+    Posiciona = [] #Textinho pra mostras pro jogador
+    Posiciona.append("     É a vez do jogador 1. Sua peça é 'X'. Escolha onde posiciona-la. \nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas.")
+    Posiciona.append("     É a vez do jogador 2. Sua peça é 'O'. Escolha onde posiciona-la. \nUse WASD para mover, espaço para confirmar e ? para tirar as duvidas.")
+    for i in range (7):
+        for j in range (7):
+            print(matriz[i][j], end ="")
+        print(" ")
     for i in range (8, -1, -1):
         jogada_valida = 0
         coordenadas = []
         while(jogada_valida == 0): #jogada do x
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[0])
-            if(matriz[coordenadas[0]][coordenadas[1]] == " "):
+            if(matriz[coordenadas[0]][coordenadas[1]] == " "): #da pra colocar ali?
                 matriz[coordenadas[0]][coordenadas[1]] = "X"
                 jogada_valida = 1
-                p1[i] = " "
+                p1[i] = " " #tirou uma peça
             x = coordenadas[0]
             y = coordenadas[1]
         x = coordenadas[0]
@@ -339,11 +222,6 @@ def main():
             x = coordenadas[0]
             y = coordenadas[1]
                 
-    MontaMatriz(matriz, x, y, p1, p2)
-
-###################################  Menu  #####################################
-
-    
+    MontaMatriz(matriz, x, y, p1, p2, 'cabo')
 
 ###############################  Chama Main  #################################
-main()
