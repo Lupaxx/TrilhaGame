@@ -17,7 +17,18 @@ def Help():
         os.system('clear')
     arquivo = open("tutorial.txt", "r")
     print (arquivo.read())
-    input()
+    
+    kb = Kbhit.KBHit()
+    z = 0
+    if(os.name == 'nt'):
+        while (z == 0):
+            if kb.kbhit():
+                c = kb.getch()
+                z = 1
+    else:
+        while (z == 0):
+            c = getkey()
+            z = 1
     if os.name == 'nt':
         os.system('cls')
     else:	
@@ -273,11 +284,9 @@ def main():
                                 MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                             elif(ord(c) == 102):
                                 status = 2 # ff
-                                jogada_valida = 1
                                 break
                             elif(ord(c) == 99):
                                 break
-                        jogada_valida = 1
         jogada_valida = 0
         ###Jogada do P2 O
         if(Block(matriz, "O") and status == 0):
@@ -326,12 +335,9 @@ def main():
                                 MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                             elif(ord(c) == 102):
                                 status = 2 # ff
-                                jogada_valida = 1
                                 break
                             elif(ord(c) == 99):
                                 break
-                        jogada_valida = 1
             
 
 ###############################  Chama Main  #################################
-main()
