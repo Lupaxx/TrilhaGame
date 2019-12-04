@@ -6,7 +6,6 @@
 #######################  Comandos Sistema Operacional  #########################
 import os
 import Kbhit
-encoding='utf-8'
         
 #################################  Tutorial  ###################################
 def Help():
@@ -42,8 +41,6 @@ def Menu():
     vetor_menu.append ('Sair')
     x = 1
     coordenadas = SelectedMenu(vetor_menu, x)
-    
-    MoveMenu(vetor_menu, x, c, enter)
     
 #################################### Monta Menu ################################
 def MontaMenu(vetor_menu, x):
@@ -99,7 +96,7 @@ def PrintMenu (print_vetor_menu):
 def MoveMenu(vetor_menu, x, c, enter):
     if (ord(c) == 32): #espaço -> enter
         if(x == 2):
-            os.sys.exit()
+            enter = "Sair"
         elif(x == 1):
             Help()
             MontaMenu(vetor_menu, x)
@@ -116,7 +113,7 @@ def MoveMenu(vetor_menu, x, c, enter):
             x += 1
             MontaMenu(vetor_menu, x)
     
-    return x
+    return (x,enter)
             
 ##############################  Selected Menu  #################################
 def SelectedMenu (vetor_menu, x): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
@@ -133,11 +130,11 @@ def SelectedMenu (vetor_menu, x): #Responde ao input, seleciona um lugar do tabu
             while (z == 0):
                 if kb.kbhit():
                     c = kb.getch()
-                    x = MoveMenu(vetor_menu, x, c, z)
+                    x,z = MoveMenu(vetor_menu, x, c, z)
         else:
             while (z == 0):
                 c = getkey()
-                x = MoveMenu(vetor_menu, x, c, z)
+                x,z = MoveMenu(vetor_menu, x, c, z)
                 
         return x
 
