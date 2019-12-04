@@ -150,10 +150,6 @@ def Selected (matriz, x, y, p1, p2, instrucoes): #Responde ao input, seleciona u
         coordenadas = MoveSelect(matriz, coordenadas[0], coordenadas[1], p1, p2, instrucoes, c, coordenadas[2])
     return (coordenadas)
 
-#################################  Move seta  ##################################
-#def MovePeca (matriz, x, y)
-#    if((CheckSeMove.W(matriz, i, j)) or (CheckSeMove.A(matriz, i, j)) or (CheckSeMove.S(matriz, i, j)) or (CheckSeMove.D(matriz, i, j))):
-
 #####################  Checa se há peças a serem movidas  #######################
 def Block (matriz, p):
     for i in range (7):
@@ -351,12 +347,20 @@ def main():
                             anterior = combo1
                             combo1 = combos(matriz, 'X')
                             if(anterior < combo1):
-                                pass
+                                retirou = 0
+                                while(retirou == 0):
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    if(matriz[coordenadas[0]][coordenadas[1]] == 'O'):
+                                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                                        retirou += 1
+                                    x = coordenadas[0]
+                                    y = coordenadas[1]
+                                       
+                                
                             
         if(ord(c) == 99):
             break
         jogada_valida = 0
-        
         ###Jogada do P2 O
         if(Block(matriz, "O") and (status == 0)):
             status = 1
@@ -412,12 +416,17 @@ def main():
                                         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 99):
                                     break
-                            anterior = combo1
-                            combo1 = combos(matriz, 'O')
-                            if(anterior < combo1):
-                                pass
-                                
-
+                            anterior = combo2
+                            combo2 = combos(matriz, 'O')
+                            if(anterior < combo2):
+                                retirou = 0
+                                while(retirou == 0):
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    if(matriz[coordenadas[0]][coordenadas[1]] == 'X'):
+                                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                                        retirou += 1
+                                    x = coordenadas[0]
+                                    y = coordenadas[1]
 
 
 
