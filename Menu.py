@@ -53,7 +53,7 @@ def MontaMenu(vetor_menu, x):
         if (i == x):
             print_vetor_menu[i] = ">" + vetor_menu[i] + "<"
         else:
-            print_vetor_menu[i] = " " + vetor_menu[i]
+            print_vetor_menu[i] = " " + vetor_menu[i] + " "
     PrintMenu(print_vetor_menu)
 
 #################################### Print Menu ################################
@@ -63,16 +63,35 @@ def PrintMenu (print_vetor_menu):
     else:	
         os.system('clear')
         
-    print ('''
-            ---|---  |---\   ---|---  |       |     |      /\ 
-               |     |    |     |     |       |     |     /  \ 
-               |     |---/      |     |       |-----|    /    \ 
-               |     |  \       |     |       |     |   /------\ 
-               |     |   \   ---|---  |-----  |     |  /        \ ''')
-    print('\n\n\n\n                               ', print_vetor_menu[0])
-    print('                                 ', print_vetor_menu[1])
-    print('                                   ', print_vetor_menu[2])
-    print("\n\n\n\n\n\tDigite 'w' ou 's' para selelcionar e 'espaço' para confirmar.")
+    print ('''|-------------------------------------------------------------------------------|
+|                                                                               |
+|             ---|---  |---\   ---|---  |       |     |      /\                 |
+|                |     |    |     |     |       |     |     /  \                |
+|                |     |---/      |     |       |-----|    /    \               |
+|                |     |  \       |     |       |     |   /------\              |
+|                |     |   \   ---|---  |-----  |     |  /        \             |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |''')
+    print("|                                 ", print_vetor_menu[0], "                                |", sep="")
+    print("|                                   ", print_vetor_menu[1], "                                  |", sep="")
+    print("|                                     ", print_vetor_menu[2], "                                    |", sep="")
+    print('''|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|                                                                               |
+|        Digite 'w' ou 's' para selelcionar e 'ESPAÇO' para confirmar.          |
+|                                                                               |
+|                                                                               |
+|-------------------------------------------------------------------------------|''')
 
 ##############################  Move seta Menu  ################################
 def MoveMenu(vetor_menu, x, c, enter):
