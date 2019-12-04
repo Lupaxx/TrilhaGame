@@ -9,7 +9,6 @@ import CheckSeMove
 import Kbhit
 import Move
 import MenuAbandono
-encoding: 'utf-8'
         
 #################################  Tutorial  ###################################
 def Help():
@@ -20,6 +19,36 @@ def Help():
     arquivo = open("tutorial.txt", "r", encoding='utf-8')
     print (arquivo.read())
     
+    kb = Kbhit.KBHit()
+    z = 0
+    if(os.name == 'nt'):
+        while (z == 0):
+            if kb.kbhit():
+                c = kb.getch()
+                z = 1
+    else:
+        while (z == 0):
+            c = getkey()
+            z = 1
+    if os.name == 'nt':
+        os.system('cls')
+    else:	
+        os.system('clear')
+
+#################################  Tela de vitória  ###################################
+def Vitoria(p):
+    if os.name == 'nt':
+        os.system('cls')
+    else:	
+        os.system('clear')
+
+    if (p=="X"):
+        arquivo = open("VitoriaP1.txt", "r", encoding='utf-8')
+        print (arquivo.read())
+    else:
+        arquivo = open("VitoriaP2.txt", "r", encoding='utf-8')
+        print (arquivo.read())
+
     kb = Kbhit.KBHit()
     z = 0
     if(os.name == 'nt'):
@@ -172,6 +201,18 @@ def conta(matriz, p):
             if((matriz[i][j] == p)):
                 cont +=1
     return cont
+
+#############################  Checa se o jogador Venceu a partida  ###################################
+def CheckSeVitoria(matriz,p)
+    n = conta(matriz,p)
+
+    if (n<3):
+        if (p=="X"):
+            p="O"
+            Vitoria(p)
+        else:
+            p="X"
+            Vitoria(p)
 
 ###############################  Conta Combo  ###################################
 def combos (matriz, p):
