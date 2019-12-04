@@ -126,9 +126,6 @@ def MoveSelect(matriz, x, y, p1, p2, instrucoes, c, enter): #Recebe uma tecla, r
         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
     elif(ord(c) == 102): #f
         enter = 2 # ff
-        import MenuAbandono
-        MenuAbandono.main()
-        MontaMenuAbandono(vetor_menu_abandono, x)
 
     coordenadas = []
     coordenadas.append(x)
@@ -161,6 +158,42 @@ def Block (matriz, p):
                     return(False)
     return(True)
 
+##################################  Conta  ####################################
+def conta(matriz, p):
+    cont = 0
+    for i in range (7):
+        for j in range(7):
+            if((matriz[i][j] == p)):
+                cont +=1
+    return cont
+
+###############################  Conta Combo  ###################################
+def combos (matriz, p):
+    cont = 0
+    for i in range (7):
+        alinhadas = 0
+        for j in range(7):
+            if((matriz[i][j] == p)):
+                alinhadas += 1
+            elif((i == 3) and (j == 3)):
+                if (alinhadas == 3):
+                   cont += 1
+                alinhadas  = 0
+        if (alinhadas == 3):
+            cont += 1
+            
+    for i in range (7):
+        alinhadas = 0
+        for j in range(7):
+            if((matriz[j][i] == p)):
+                alinhadas += 1
+            elif((i == 3) and (j == 3)):
+                if (alinhadas == 3):
+                    cont += 1
+                alinhadas  = 0
+        if (alinhadas == 3):
+            cont += 1
+    return cont
 ###################################  Main  #####################################
 def main():
     matriz = [" "]*7
@@ -206,6 +239,8 @@ def main():
     Posiciona.append("|        É a vez do jogador 1. Sua peça é 'X'. Escolha onde posiciona-la.       |\n|                                                                               |") 
     Posiciona.append("|        É a vez do jogador 2. Sua peça é 'O'. Escolha onde posiciona-la.       |\n|                                                                               |")
     coordenadas = []
+    combo1 = 0
+    combo2 = 0
     ### 1ª parte do jogo - posicionamento de peças
     for i in range (8, -1, -1):
         jogada_valida = 0
@@ -239,6 +274,8 @@ def main():
                 
     MontaMatriz(matriz, x, y, p1, p2, 'cabo')
 
+
+
     ### 2ª parte do jogo - movimentação de peças
 
     Posiciona[0] = "|       É a vez do jogador 1. Sua peça é 'X'. Escolha qual deseja mover.        |\n|                                                                               |"
@@ -247,6 +284,7 @@ def main():
     status = 0
     kb = Kbhit.KBHit()
     while (status == 0):
+        c = 'a'
         jogada_valida = 0
         ###jogada do P1 X
         if(Block(matriz, "X")):
@@ -262,45 +300,54 @@ def main():
                 x = coordenadas[0]
                 y = coordenadas[1]
                 if(matriz[coordenadas[0]][coordenadas[1]] == "X"): #da pra mover?
-                    if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
-                        MontaMatriz(matriz, x, y, p1, p2, selecionada)
-                        while(jogada_valida == 0):
-                            c = Hit()
-                            #W
-                            if((ord(c) == 119) and (CheckSeMove.W(matriz, x, y))):
-                                matriz[x][y] = " "
-                                x = Move.W(matriz, x, y)
-                                matriz[x][y] = "X"
-                                jogada_valida = 1
-                            #A
-                            elif((ord(c) == 97) and (CheckSeMove.A(matriz, x, y))):
-                                matriz[x][y] = " "
-                                y = Move.A(matriz, x, y)
-                                matriz[x][y] = "X"
-                                jogada_valida = 1
-                            #S
-                            elif((ord(c) == 115) and (CheckSeMove.S(matriz, x, y))):
-                                matriz[x][y] = " "
-                                x = Move.S(matriz, x, y)
-                                matriz[x][y] = "X"
-                                jogada_valida = 1
-                            #D
-                            elif((ord(c) == 100) and (CheckSeMove.D(matriz, x, y))):
-                                matriz[x][y] = " "
-                                y = Move.D(matriz, x, y)
-                                matriz[x][y] = "X"
-                                jogada_valida = 1
-                            elif(ord(c) == 63): #?
-                                Help()
-                                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-                            elif(ord(c) == 102):
-                                status = 2 # ff
-                                break
-                            elif(ord(c) == 99):
-                                break
+                    if(conta(matriz, 'X') > 3):
+                        if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
+                            MontaMatriz(matriz, x, y, p1, p2, selecionada)
+                            while(jogada_valida == 0):
+                                c = Hit()
+                                #W
+                                if((ord(c) == 119) and (CheckSeMove.W(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    x = Move.W(matriz, x, y)
+                                    matriz[x][y] = "X"
+                                    jogada_valida = 1
+                                #A
+                                elif((ord(c) == 97) and (CheckSeMove.A(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    y = Move.A(matriz, x, y)
+                                    matriz[x][y] = "X"
+                                    jogada_valida = 1
+                                #S
+                                elif((ord(c) == 115) and (CheckSeMove.S(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    x = Move.S(matriz, x, y)
+                                    matriz[x][y] = "X"
+                                    jogada_valida = 1
+                                #D
+                                elif((ord(c) == 100) and (CheckSeMove.D(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    y = Move.D(matriz, x, y)
+                                    matriz[x][y] = "X"
+                                    jogada_valida = 1
+                                elif(ord(c) == 63): #?
+                                    Help()
+                                    MontaMatriz(matriz, x, y, p1, p2, instrucoes)
+                                elif(ord(c) == 102):
+                                    status = 2 # ff
+                                    break
+                                elif(ord(c) == 99):
+                                    break
+                            anterior = combo1
+                            combo1 = combos(matriz, 'X')
+                            if(anterior < combo1):
+                                pass
+                            
+        if(ord(c) == 99):
+            break
         jogada_valida = 0
+        
         ###Jogada do P2 O
-        if(Block(matriz, "O") and status == 0):
+        if(Block(matriz, "O") and (status == 0)):
             status = 1
             break
         elif(status == 0):
@@ -313,42 +360,51 @@ def main():
                 x = coordenadas[0]
                 y = coordenadas[1]
                 if(matriz[coordenadas[0]][coordenadas[1]] == "O"): #da pra mover?
-                    if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
-                        MontaMatriz(matriz, x, y, p1, p2, selecionada)
-                        while(jogada_valida == 0):
-                            c = Hit()
-                            #W
-                            if((ord(c) == 119) and (CheckSeMove.W(matriz, x, y))):
-                                matriz[x][y] = " "
-                                x = Move.W(matriz, x, y)
-                                matriz[x][y] = "O"
-                                jogada_valida = 1
-                            #A
-                            elif((ord(c) == 97) and (CheckSeMove.A(matriz, x, y))):
-                                matriz[x][y] = " "
-                                y = Move.A(matriz, x, y)
-                                matriz[x][y] = "O"
-                                jogada_valida = 1
-                            #S
-                            elif((ord(c) == 115) and (CheckSeMove.S(matriz, x, y))):
-                                matriz[x][y] = " "
-                                x = Move.S(matriz, x, y)
-                                matriz[x][y] = "O"
-                                jogada_valida = 1
-                            #D
-                            elif((ord(c) == 100) and (CheckSeMove.D(matriz, x, y))):
-                                matriz[x][y] = " "
-                                y = Move.D(matriz, x, y)
-                                matriz[x][y] = "O"
-                                jogada_valida = 1
-                            elif(ord(c) == 63): #?
-                                Help()
-                                MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-                            elif(ord(c) == 102):
-                                status = 2 # ff
-                                break
-                            elif(ord(c) == 99):
-                                break
-            
+                    if(conta(matriz, 'O') > 3):
+                        if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
+                            MontaMatriz(matriz, x, y, p1, p2, selecionada)
+                            while(jogada_valida == 0):
+                                c = Hit()
+                                #W
+                                if((ord(c) == 119) and (CheckSeMove.W(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    x = Move.W(matriz, x, y)
+                                    matriz[x][y] = "O"
+                                    jogada_valida = 1
+                                #A
+                                elif((ord(c) == 97) and (CheckSeMove.A(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    y = Move.A(matriz, x, y)
+                                    matriz[x][y] = "O"
+                                    jogada_valida = 1
+                                #S
+                                elif((ord(c) == 115) and (CheckSeMove.S(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    x = Move.S(matriz, x, y)
+                                    matriz[x][y] = "O"
+                                    jogada_valida = 1
+                                #D
+                                elif((ord(c) == 100) and (CheckSeMove.D(matriz, x, y))):
+                                    matriz[x][y] = " "
+                                    y = Move.D(matriz, x, y)
+                                    matriz[x][y] = "O"
+                                    jogada_valida = 1
+                                elif(ord(c) == 63): #?
+                                    Help()
+                                    MontaMatriz(matriz, x, y, p1, p2, instrucoes)
+                                elif(ord(c) == 102):
+                                    status = 2 # ff
+                                    break
+                                elif(ord(c) == 99):
+                                    break
+                            anterior = combo1
+                            combo1 = combos(matriz, 'O')
+                            if(anterior < combo1):
+                                pass
+                                
 
-###############################  Chama Main  #################################
+
+
+
+
+                                

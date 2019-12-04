@@ -43,6 +43,7 @@ def Menu():
     coordenadas = SelectedMenu(vetor_menu, x)
     
     MoveMenu(vetor_menu, x, c, enter)
+    
 #################################### Monta Menu ################################
 def MontaMenu(vetor_menu, x):
     print_vetor_menu = []
