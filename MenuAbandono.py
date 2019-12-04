@@ -89,28 +89,23 @@ def MoveMenuAbandono(vetor_menu_abandono, x, c, enter):
             
 ##############################  Selected Menu Abandono  #################################
 def SelectedMenuAbandono (vetor_menu_abandono, x): #Responde ao input, seleciona um lugar do tabuleiro e retorna as coordenadas desse lugar
-    if __name__ == "__main__":
-        
-        kb = Kbhit.KBHit()
-        MontaMenuAbandono(vetor_menu_abandono, x)
+    kb = Kbhit.KBHit()
+    MontaMenuAbandono(vetor_menu_abandono, x)
 
-        hit = 0
-        enter = 0
-        
-        z = 0
-        if(os.name == 'nt'):
-            while (z == 0):
-                if kb.kbhit():
-                    c = kb.getch()
-                    x,z = MoveMenuAbandono(vetor_menu_abandono, x, c, z)
-                    
-        else:
-            while (z == 0):
-                c = getkey()
+    hit = 0
+    enter = 0
+    
+    z = 0
+    if(os.name == 'nt'):
+        while (z == 0):
+            if kb.kbhit():
+                c = kb.getch()
                 x,z = MoveMenuAbandono(vetor_menu_abandono, x, c, z)
                 
-        return x
+    else:
+        while (z == 0):
+            c = getkey()
+            x,z = MoveMenuAbandono(vetor_menu_abandono, x, c, z)
+            
+    return x
 
-################################  Chama menu Abandono ##################################
-
-MenuAbandono()

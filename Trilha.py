@@ -8,6 +8,7 @@ import os
 import CheckSeMove
 import Kbhit
 import Move
+import MenuAbandono
         
 #################################  Tutorial  ###################################
 def Help():
@@ -124,8 +125,12 @@ def MoveSelect(matriz, x, y, p1, p2, instrucoes, c, enter): #Recebe uma tecla, r
     elif(ord(c) == 63): #?
         Help()
         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-    elif(ord(c) == 102): #f
-        enter = 2 # ff
+    elif(ord(c) == 102): #ff
+        if (MenuAbandono.MenuAbandono()):
+            enter = 2
+        else:
+            MontaMatriz(matriz, x, y, p1, p2, instrucoes)
+            
 
     coordenadas = []
     coordenadas.append(x)
@@ -241,13 +246,17 @@ def main():
     coordenadas = []
     combo1 = 0
     combo2 = 0
+    status = 0
     ### 1ª parte do jogo - posicionamento de peças
     for i in range (8, -1, -1):
         jogada_valida = 0
+        if (status == 2):
+            break
         ###jogada do P1 X
         while(jogada_valida == 0):
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[0])
             if (coordenadas[2] == 2):
+                status = 2
                 break
             if(matriz[coordenadas[0]][coordenadas[1]] == " "): #da pra colocar ali?
                 matriz[coordenadas[0]][coordenadas[1]] = "X"
@@ -256,12 +265,13 @@ def main():
             x = coordenadas[0]
             y = coordenadas[1]
         jogada_valida = 0
-        if (coordenadas[2] == 2):
+        if (status == 2):
             break
         ###Jogada do P2 O
         while(jogada_valida == 0): 
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[1])
             if (coordenadas[2] == 2):
+                status = 2
                 break
             if(matriz[coordenadas[0]][coordenadas[1]] == " "):
                 matriz[coordenadas[0]][coordenadas[1]] = "O"
@@ -269,8 +279,6 @@ def main():
                 p2[i] = " "
             x = coordenadas[0]
             y = coordenadas[1]
-        if (coordenadas[2] == 2):
-            break
                 
     MontaMatriz(matriz, x, y, p1, p2, 'cabo')
 
@@ -281,7 +289,6 @@ def main():
     Posiciona[0] = "|       É a vez do jogador 1. Sua peça é 'X'. Escolha qual deseja mover.        |\n|                                                                               |"
     Posiciona[1] = "|       É a vez do jogador 2. Sua peça é 'O'. Escolha qual deseja mover.        |\n|                                                                               |"
     selecionada = "|                 Peça selecioanada! Escolha para onde movê-la.                 |\n|                       Use 'C' para cancelar a seleção.                        |"
-    status = 0
     kb = Kbhit.KBHit()
     while (status == 0):
         c = 'a'
@@ -332,9 +339,13 @@ def main():
                                 elif(ord(c) == 63): #?
                                     Help()
                                     MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-                                elif(ord(c) == 102):
-                                    status = 2 # ff
-                                    break
+                                elif(ord(c) == 102): #ff
+                                    if (MenuAbandono.MenuAbandono()):
+                                        status = 2
+                                        jogada_valida = 2
+                                        break
+                                    else:
+                                        MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 99):
                                     break
                             anterior = combo1
@@ -392,9 +403,13 @@ def main():
                                 elif(ord(c) == 63): #?
                                     Help()
                                     MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-                                elif(ord(c) == 102):
-                                    status = 2 # ff
-                                    break
+                                elif(ord(c) == 102): #ff
+                                    if (MenuAbandono.MenuAbandono()):
+                                        status = 2
+                                        jogada_valida = 2
+                                        break
+                                    else:
+                                        MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 99):
                                     break
                             anterior = combo1
