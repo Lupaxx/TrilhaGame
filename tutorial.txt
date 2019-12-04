@@ -37,7 +37,9 @@ Tutorial:
         Colocando as peças: Esta é a fase inicial do jogo onde cada jogador coloca
     um peça de cada vez alternando entre jogadores, caso um dos jogadores forme uma
     linha horizontal ou vertical com três peças (um moinho), ele terá o direito de
-    remover uma peça de seu adversário do tabuleiro.
+    remover uma peça de seu adversário do tabuleiro, caso essa peça não faça parte
+    de um combo, Mas caso so hajam peças fazendo parte de um combo, você poderá 
+    retira-lá.
         Movendo as peças: Esta fase se inicia quando ambos os jogadores colocarem
     suas nove peças em jogo. Consiste em mover suas peças ao longo de uma das linhas
     do tabuleiro para uma outra casa adjacente. Caso um dos jogadores tenha somente
