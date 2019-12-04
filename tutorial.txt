@@ -1,70 +1,70 @@
-    Tutorial:
+Tutorial:
 
-	O jogo parece muito complicado? Não se preocupe, a qualquer momento você pode 
+	O jogo parece muito complicado? NÃ£o se preocupe, a qualquer momento vocÃª pode 
     voltar para o tutorial!
-                                       Descrição:                                   
+                                       DescriÃ§Ã£o:                                   
     
     O jogo de Trilha tem dois participantes, que usam um tabuleiro para jogar.
     
     Jogadores - 2
-    Peças - 18 peças sendo 9 brancas e 9 pretas.
+    PeÃ§as - 18 peÃ§as sendo 9 brancas e 9 pretas.
     Tabuleiro - tabuleiro com 24 casa interligados horizontalmente e verticalmente.
-    Objetivo - Deixar o adversário com 2 peças no tabuleiro ou deixá-lo sem movimentos.
+    Objetivo - Deixar o adversÃ¡rio com 2 peÃ§as no tabuleiro ou deixÃ¡-lo sem movimentos.
 
-					Mecânica:
-	Serão usadas as teclas W, A, S e D para movimentação:
-    W - Vai para a posição de cima
-    S - Vai para a posição de baixo
-    A - Vai para a posisção da esquerda
-    D - Vai para a posição da direita
-    obs: Se observar, a posição das teclas juntas e suas funções formam algo como 
+					MecÃ¢nica:
+	SerÃ£o usadas as teclas W, A, S e D para movimentaÃ§Ã£o:
+    W - Vai para a posiÃ§Ã£o de cima
+    S - Vai para a posiÃ§Ã£o de baixo
+    A - Vai para a posisÃ§Ã£o da esquerda
+    D - Vai para a posiÃ§Ã£o da direita
+    obs: Se observar, a posiÃ§Ã£o das teclas juntas e suas funÃ§Ãµes formam algo como 
     as setas do teclado
-	No menu so serão usadas as teclas W e A, já que as unicas opções são a 
-    movimentação para cima e para baixo.
-	Você pode mover até que seja apertada a tecla espaço, que confirmará a 
-    seleção do lugar em que está o > <
-	A movimentação se orienta a partir dos caractecteres > e < em volta da opção. 
-    No menu, aparecerá ">tutorial<", o que quer dizer que o tutorial está atualmente 
-    selecionado e será aberto caso precione a tecla espaço. Ja no jogo em si, todas 
-    as casas do tabuleiro começam marcadas com ( ), tirando por uma, que é > <. Esta 
-    é a que está atualmente selecionada e sua peça será posta ali caso aperte a tecla 
-    espaço.
+	No menu so serÃ£o usadas as teclas W e A, jÃ¡ que as unicas opÃ§Ãµes sÃ£o a 
+    movimentaÃ§Ã£o para cima e para baixo.
+	VocÃª pode mover atÃ© que seja apertada a tecla espaÃ§o, que confirmarÃ¡ a 
+    seleÃ§Ã£o do lugar em que estÃ¡ o > <
+	A movimentaÃ§Ã£o se orienta a partir dos caractecteres > e < em volta da opÃ§Ã£o. 
+    No menu, aparecerÃ¡ ">tutorial<", o que quer dizer que o tutorial estÃ¡ atualmente 
+    selecionado e serÃ¡ aberto caso precione a tecla espaÃ§o. Ja no jogo em si, todas 
+    as casas do tabuleiro comeÃ§am marcadas com ( ), tirando por uma, que Ã© > <. Esta 
+    Ã© a que estÃ¡ atualmente selecionada e sua peÃ§a serÃ¡ posta ali caso aperte a tecla 
+    espaÃ§o.
 
                                      O Jogo Trilha:                                 
     
     O jogo consiste em tres partes principais:
     
-        Colocando as peças: Esta é a fase inicial do jogo onde cada jogador coloca
-    um peça de cada vez alternando entre jogadores, caso um dos jogadores forme uma
-    linha horizontal ou vertical com três peças (um moinho), ele terá o direito de
-    remover uma peça de seu adversário do tabuleiro.
-        Movendo as peças: Esta fase se inicia quando ambos os jogadores colocarem
-    suas nove peças em jogo. Consiste em mover suas peças ao longo de uma das linhas
+        Colocando as peÃ§as: Esta Ã© a fase inicial do jogo onde cada jogador coloca
+    um peÃ§a de cada vez alternando entre jogadores, caso um dos jogadores forme uma
+    linha horizontal ou vertical com trÃªs peÃ§as (um moinho), ele terÃ¡ o direito de
+    remover uma peÃ§a de seu adversÃ¡rio do tabuleiro.
+        Movendo as peÃ§as: Esta fase se inicia quando ambos os jogadores colocarem
+    suas nove peÃ§as em jogo. Consiste em mover suas peÃ§as ao longo de uma das linhas
     do tabuleiro para uma outra casa adjacente. Caso um dos jogadores tenha somente
-    3 peças em jogo, ele pode "voar" com suas peças, podendo mover para qualquer
-    casa que não esteja ocupada por uma peça do adversário.
-        Removendo peças adversárias: Em qualquer uma das fases acima quando um
-    jogador forma uma linha horizontal ou vertical com 3 peças ele fará um "moinho",
-    isso lhe dá o direito de remover uma peça de seu adversário, contudo você não
-    poderá remover uma peça do seu adversário que faz parte de um moinho dele, a não
-    ser que não exista outra peça para remover.
+    3 peÃ§as em jogo, ele pode "voar" com suas peÃ§as, podendo mover para qualquer
+    casa que nÃ£o esteja ocupada por uma peÃ§a do adversÃ¡rio.
+        Removendo peÃ§as adversÃ¡rias: Em qualquer uma das fases acima quando um
+    jogador forma uma linha horizontal ou vertical com 3 peÃ§as ele farÃ¡ um "moinho",
+    isso lhe dÃ¡ o direito de remover uma peÃ§a de seu adversÃ¡rio, contudo vocÃª nÃ£o
+    poderÃ¡ remover uma peÃ§a do seu adversÃ¡rio que faz parte de um moinho dele, a nÃ£o
+    ser que nÃ£o exista outra peÃ§a para remover.
     
-                                      Estratégia:                                   
+                                      EstratÃ©gia:                                   
                                       
-        No começo do jogo, é muito importante colocar as peças nos lugares mais
-    versáteis para tentar formar imediatamente moinhos e não cometer o erro de
-    concentrar as peças próprias em uma área do tabuleiro.
-        Uma posição ideal, que geralmente resulta em uma vitória, é ser capaz de colocar
-    uma peça que possa se movimentar entre dois moinhos diferentes. 
+        No comeÃ§o do jogo, Ã© muito importante colocar as peÃ§as nos lugares mais
+    versÃ¡teis para tentar formar imediatamente moinhos e nÃ£o cometer o erro de
+    concentrar as peÃ§as prÃ³prias em uma Ã¡rea do tabuleiro.
+        Uma posiÃ§Ã£o ideal, que geralmente resulta em uma vitÃ³ria, Ã© ser capaz de colocar
+    uma peÃ§a que possa se movimentar entre dois moinhos diferentes. 
     
                                      Fim da Partida:                                 
                                      
-    O jogo termina quando 3 situações são alcançadas:
+    O jogo termina quando 3 situaÃ§Ãµes sÃ£o alcanÃ§adas:
     
-        Se um jogador reduzir as peças de seu adversário para 2.
-        Se um jogador deixar seu adversário sem nenhuma jogada válida. Caso seu
-    adversário tenha somente 3 peças em jogo, ele não poderá ser "trancado".
-        Se ambos jogadores estiverem com 3 peças em jogo e, a partir deste momento, se
-    em 10 jogadas não houver vencedor, o jogo terminará e será declarado um empate.
+        Se um jogador reduzir as peÃ§as de seu adversÃ¡rio para 2.
+        Se um jogador deixar seu adversÃ¡rio sem nenhuma jogada vÃ¡lida. Caso seu
+    adversÃ¡rio tenha somente 3 peÃ§as em jogo, ele nÃ£o poderÃ¡ ser "trancado".
+        Se ambos jogadores estiverem com 3 peÃ§as em jogo e, a partir deste momento, se
+    em 10 jogadas nÃ£o houver vencedor, o jogo terminarÃ¡ e serÃ¡ declarado um empate.
     
-    *************** Precione alguma tecla para voltar ao menu inicial. ***************
+    *************** Precione qualquer tecla para voltar ao menu inicial. ***************
