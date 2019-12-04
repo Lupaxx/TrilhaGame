@@ -199,7 +199,7 @@ def conta(matriz, p):
     return cont
 
 #############################  Checa se o jogador Venceu a partida  ###################################
-def CheckSeVitoria(matriz,p)
+def CheckSeVitoria(matriz,p):
     n = conta(matriz,p)
 
     if (n<3):
@@ -209,7 +209,7 @@ def CheckSeVitoria(matriz,p)
         else:
             p="X"
             Vitoria(p)
-
+        return 1
 ###############################  Conta Combo  ###################################
 def combos (matriz, p):
     cont = 0
@@ -469,6 +469,7 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+
 
 
 
