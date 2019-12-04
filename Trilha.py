@@ -9,6 +9,7 @@ import CheckSeMove
 import Kbhit
 import Move
 import MenuAbandono
+encoding: 'utf-8'
         
 #################################  Tutorial  ###################################
 def Help():
@@ -16,7 +17,7 @@ def Help():
         os.system('cls')
     else:	
         os.system('clear')
-    arquivo = open("tutorial.txt", "r")
+    arquivo = open("tutorial.txt", "r", encoding='utf-8')
     print (arquivo.read())
     
     kb = Kbhit.KBHit()
