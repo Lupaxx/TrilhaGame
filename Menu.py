@@ -6,6 +6,7 @@
 #######################  Comandos Sistema Operacional  #########################
 import os
 import Kbhit
+encoding='utf-8'
         
 #################################  Tutorial  ###################################
 def Help():
@@ -13,7 +14,7 @@ def Help():
         os.system('cls')
     else:	
         os.system('clear')
-    arquivo = open("tutorial.txt", "r")
+    arquivo = open("tutorial.txt", "r", encoding='utf-8')
     print (arquivo.read())
     
     kb = Kbhit.KBHit()
