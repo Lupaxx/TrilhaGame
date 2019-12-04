@@ -14,7 +14,7 @@ def MenuAbandono():
     if (coordenadas_abandono == 1):
         return True
     else:
-        print("Não")
+        return False
 
 #################################### Monta Menu Abandono################################
 def MontaMenuAbandono(vetor_menu_abandono, x):
