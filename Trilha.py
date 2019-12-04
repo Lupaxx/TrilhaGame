@@ -35,36 +35,6 @@ def Help():
     else:	
         os.system('clear')
 
-#################################  Tela de vitória  ###################################
-def Vitoria(p):
-    if os.name == 'nt':
-        os.system('cls')
-    else:	
-        os.system('clear')
-
-    if (p=="X"):
-        arquivo = open("VitoriaP1.txt", "r", encoding='utf-8')
-        print (arquivo.read())
-    else:
-        arquivo = open("VitoriaP2.txt", "r", encoding='utf-8')
-        print (arquivo.read())
-
-    kb = Kbhit.KBHit()
-    z = 0
-    if(os.name == 'nt'):
-        while (z == 0):
-            if kb.kbhit():
-                c = kb.getch()
-                z = 1
-    else:
-        while (z == 0):
-            c = getkey()
-            z = 1
-    if os.name == 'nt':
-        os.system('cls')
-    else:	
-        os.system('clear')
-
 ###############################  Monta Matriz  #################################
 def MontaMatriz(matriz, x, y, p1, p2, instrucoes): #Monta pra colocar no Tabuleiro
     tabuleiro = [" "]*7
@@ -198,18 +168,6 @@ def conta(matriz, p):
                 cont +=1
     return cont
 
-#############################  Checa se o jogador Venceu a partida  ###################################
-def CheckSeVitoria(matriz,p):
-    n = conta(matriz,p)
-
-    if (n<3):
-        if (p=="X"):
-            p="O"
-            Vitoria(p)
-        else:
-            p="X"
-            Vitoria(p)
-        return 1
 ###############################  Conta Combo  ###################################
 def combos (matriz, p):
     cont = 0
@@ -465,9 +423,10 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
-                                       
+                        else:
+                            status = 1
+                            break               
                                 
-                            
         if(ord(c) == 99):
             break
         jogada_valida = 0
@@ -537,9 +496,58 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                    else:
+                        status = 1
+                        break
 
+    ############################# Status ######################
 
+    if (status==1):
+        Vitoria("X")
+    elif(status==2):
+        Vitoria("O")
 
+#################################  Tela de vitória  ###################################
+def Vitoria(p):
+    if os.name == 'nt':
+        os.system('cls')
+    else:	
+        os.system('clear')
 
+    if (p=="X"):
+        arquivo = open("VitoriaP1.txt", "r", encoding='utf-8')
+        print (arquivo.read())
+    else:
+        arquivo = open("VitoriaP2.txt", "r", encoding='utf-8')
+        print (arquivo.read())
 
-                                
+    kb = Kbhit.KBHit()
+    z = 0
+    if(os.name == 'nt'):
+        while (z == 0):
+            if kb.kbhit():
+                c = kb.getch()
+                z = 1
+    else:
+        while (z == 0):
+            c = getkey()
+            z = 1
+    if os.name == 'nt':
+        os.system('cls')
+    else:	
+        os.system('clear')
+
+#############################  Checa se o jogador Venceu a partida  ###################################
+def CheckSeVitoria(matriz,p):
+    n = conta(matriz,p)
+
+    if (n<3):
+        if (p=="X"):
+            p="O"
+            Vitoria(p)
+        else:
+            p="X"
+            Vitoria(p)
+        return True
+    else:
+        return False
