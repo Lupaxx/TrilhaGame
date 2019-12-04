@@ -68,18 +68,3 @@ class KBHit:
         else:
             dr,dw,de = select([sys.stdin], [], [], 0)
             return dr != []
-
-def Hit():
-
-    kb = Kbhit.KBHit()
-    c = 'q'
-    if(os.name == 'nt'):
-        while (c == 'q'):
-            if kb.kbhit():
-                c = kb.getch()
-    else:
-        while (c == 'q'):
-            c = getkey()
-
-    return c
-        
