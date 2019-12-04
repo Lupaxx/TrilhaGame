@@ -210,69 +210,41 @@ def CheckSeVitoria(matriz,p):
             p="X"
             Vitoria(p)
         return 1
-###############################  Conta Combo  ###################################
-def combos (matriz, p):
-    cont = 0
-    for i in range (7):
-        alinhadas = 0
-        for j in range(7):
-            if((matriz[i][j] == p)):
-                alinhadas += 1
-            elif((i == 3) and (j == 3)):
-                if (alinhadas == 3):
-                   cont += 1
-                alinhadas  = 0
-        if (alinhadas == 3):
-            cont += 1
-            
-    for i in range (7):
-        alinhadas = 0
-        for j in range(7):
-            if((matriz[j][i] == p)):
-                alinhadas += 1
-            elif((i == 3) and (j == 3)):
-                if (alinhadas == 3):
-                    cont += 1
-                alinhadas  = 0
-        if (alinhadas == 3):
-            cont += 1
-    return cont
-###############################  Pode Retirar ##################################
-def poderetirar (matriz, x, y, p):
-    combo = 0
 
-    #Faz combo?
-    for i in range (7):
+################################   É combo?   ###################################
+def ehcombo(matriz, x, y, p):
+    combo = 0
+    comeca = 0
+    if(y == 3 and x > 3):
+        comeca = 4
+    for i in range (comeca, 7):
         if(matriz[i][y] == p):
             combo += 1
-        if((i == 3) and (y ==3)):
+        elif((i == 3) and (y ==3)):
             break
     if (combo != 3):
         combo = 0
-        for i in range (7):
+        comeca = 0
+        if(x == 3 and y > 3):
+            comeca = 4
+        for i in range (comeca, 7):
             if(matriz[x][i] == p):
                 combo += 1
-            if((i == 3) and (y ==3)):
+            elif((i == 3) and (x ==3)):
                 break
-            
-    #Faz! Tem outra fora de combo?
-    if(combo == 3):
+    if (combo == 3):
+        return True
+    return False
+
+###############################  Pode Retirar ##################################
+def poderetirar (matriz, x, y, p):
+    combo = 0
+    #Faz Combo! Tem outra fora de combo?
+    if(ehcombo(matriz, x, y, p)):
         for i in range(7):
             for j in range(7):
-                for l in range (7):
-                    if(matriz[l][j] == p):
-                        combo += 1
-                    if((i == 3) and (y ==3)):
-                        break
-                if (combo != 3):
-                    combo = 0
-                    for l in range (7):
-                        if(matriz[i][l] == p):
-                            combo += 1
-                        if((i == 3) and (y ==3)):
-                            break
-                #Tem sim, tira essa não
-                if(combo != 3):
+                #Tem umazinha fora de combo, tira essa n 
+                if (ehcombo(matriz, i, j, p) == False):
                     return False
     #Faz não, pode tirar
     else:
@@ -347,9 +319,7 @@ def main():
             x = coordenadas[0]
             y = coordenadas[1]
             #Cheka o combo
-            anterior = combo1
-            combo1 = combos(matriz, 'X')
-            if(anterior < combo1):
+            if(ehcombo(matriz, x, y, 'X')):
                 retirou = 0
                 while(retirou == 0):
                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
@@ -374,9 +344,7 @@ def main():
             x = coordenadas[0]
             y = coordenadas[1]
             #Cheka o combo
-            anterior = combo2
-            combo2 = combos(matriz, 'O')
-            if(anterior < combo2):
+            if(ehcombo(matriz, x, y, 'O')):
                 retirou = 0
                 while(retirou == 0):
                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
@@ -454,9 +422,7 @@ def main():
                                         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 99):
                                     break
-                            anterior = combo1
-                            combo1 = combos(matriz, 'X')
-                            if(anterior < combo1):
+                            if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
@@ -526,9 +492,7 @@ def main():
                                         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 99):
                                     break
-                            anterior = combo2
-                            combo2 = combos(matriz, 'O')
-                            if(anterior < combo2):
+                            if(ehcombo(matriz, x, y, 'O')):
                                 retirou = 0
                                 while(retirou == 0):
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
