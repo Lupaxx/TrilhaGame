@@ -9,7 +9,6 @@ import CheckSeMove
 import Kbhit
 import Move
 import MenuAbandono
-encoding: 'utf-8'
         
 #################################  Tutorial  ###################################
 def Help():
@@ -17,7 +16,7 @@ def Help():
         os.system('cls')
     else:	
         os.system('clear')
-    arquivo = open("tutorial.txt", "r", encoding='utf-8')
+    arquivo = open("tutorial.txt", "r")
     print (arquivo.read())
     
     kb = Kbhit.KBHit()
@@ -196,6 +195,50 @@ def combos (matriz, p):
         if (alinhadas == 3):
             cont += 1
     return cont
+###############################  Pode Retirar ##################################
+def poderetirar (matriz, x, y, p):
+    combo = 0
+
+    #Faz combo?
+    for i in range (7):
+        if(matriz[i][y] == p):
+            combo += 1
+        if((i == 3) and (y ==3)):
+            break
+    if (combo != 3):
+        combo = 0
+        for i in range (7):
+            if(matriz[x][i] == p):
+                combo += 1
+            if((i == 3) and (y ==3)):
+                break
+            
+    #Faz! Tem outra fora de combo?
+    if(combo == 3):
+        for i in range(7):
+            for j in range(7):
+                for l in range (7):
+                    if(matriz[l][j] == p):
+                        combo += 1
+                    if((i == 3) and (y ==3)):
+                        break
+                if (combo != 3):
+                    combo = 0
+                    for l in range (7):
+                        if(matriz[i][l] == p):
+                            combo += 1
+                        if((i == 3) and (y ==3)):
+                            break
+                #Tem sim, tira essa não
+                if(combo != 3):
+                    return False
+    #Faz não, pode tirar
+    else:
+        return True
+
+    #Não tem nada fora de combo, como assim... tira essa peça então
+    return True
+
 ###################################  Main  #####################################
 def main():
     matriz = [" "]*7
@@ -261,6 +304,18 @@ def main():
                 p1[i] = " " #tirou uma peça
             x = coordenadas[0]
             y = coordenadas[1]
+            #Cheka o combo
+            anterior = combo1
+            combo1 = combos(matriz, 'X')
+            if(anterior < combo1):
+                retirou = 0
+                while(retirou == 0):
+                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                    if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
+                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                        retirou += 1
+                    x = coordenadas[0]
+                    y = coordenadas[1]
         jogada_valida = 0
         if (status == 2):
             break
@@ -276,6 +331,18 @@ def main():
                 p2[i] = " "
             x = coordenadas[0]
             y = coordenadas[1]
+            #Cheka o combo
+            anterior = combo2
+            combo2 = combos(matriz, 'O')
+            if(anterior < combo2):
+                retirou = 0
+                while(retirou == 0):
+                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                    if((matriz[coordenadas[0]][coordenadas[1]] == 'X') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'X'))):
+                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                        retirou += 1
+                    x = coordenadas[0]
+                    y = coordenadas[1]
                 
     MontaMatriz(matriz, x, y, p1, p2, 'cabo')
 
@@ -351,7 +418,7 @@ def main():
                                 retirou = 0
                                 while(retirou == 0):
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
-                                    if(matriz[coordenadas[0]][coordenadas[1]] == 'O'):
+                                    if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
@@ -422,8 +489,8 @@ def main():
                             if(anterior < combo2):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
-                                    if(matriz[coordenadas[0]][coordenadas[1]] == 'X'):
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                                    if(matriz[coordenadas[0]][coordenadas[1]] == 'X' and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
