@@ -75,6 +75,7 @@ def PrintMenu (print_vetor_menu):
 |                                                                               |
 |                                                                               |
 |                                                                               |
+|                                                                               |
 |                                                                               |''')
     print("|                                 ", print_vetor_menu[0], "                                |", sep="")
     print("|                                   ", print_vetor_menu[1], "                                  |", sep="")
