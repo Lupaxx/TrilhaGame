@@ -441,20 +441,15 @@ def main():
                             if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
-<<<<<<< HEAD
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 2
                                         break
-=======
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
->>>>>>> refs/remotes/origin/master
                                     if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
-<<<<<<< HEAD
                                     y = coordenadas[1]
                     #tem menos de 3 peças?
                     else:
@@ -497,9 +492,6 @@ def main():
                         
                                        
                                 
-=======
-                                    y = coordenadas[1]                                   
->>>>>>> refs/remotes/origin/master
                             
         if(ord(c) == 99):
             break
@@ -562,15 +554,11 @@ def main():
                             if(ehcombo(matriz, x, y, 'O')):
                                 retirou = 0
                                 while(retirou == 0):
-<<<<<<< HEAD
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 1
                                         break
-=======
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |\n|                                                                               |')
->>>>>>> refs/remotes/origin/master
                                     if(matriz[coordenadas[0]][coordenadas[1]] == 'X' and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
