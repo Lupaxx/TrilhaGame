@@ -389,6 +389,9 @@ def main():
         if(Block(matriz, "X")):
             status = 2
             break
+        elif(Block(matriz, "O")):
+            status = 1
+            break
         else:
             while(jogada_valida == 0):
                 coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[0])
@@ -491,19 +494,15 @@ def main():
                                     y = coordenadas[1]
                                     if(conta(matriz, 'O') == 2):
                                         status = 1
-                        
-                        
-                        
-                        
-                                       
-                                
-                            
         if(ord(c) == 99):
             break
         jogada_valida = 0
         ###Jogada do P2 O
         if(Block(matriz, "O") and (status == 0)):
             status = 1
+            break
+        elif(Block(matriz, "X")):
+            status = 2
             break
         elif(status == 0):
             while(jogada_valida == 0):
