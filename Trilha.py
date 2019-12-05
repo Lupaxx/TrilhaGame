@@ -340,7 +340,7 @@ def main():
                     x = coordenadas[0]
                     y = coordenadas[1]
         jogada_valida = 0
-        if (status == 2):
+        if (status != 0):
             break
         ###Jogada do P2 O
         while(jogada_valida == 0): 
@@ -369,6 +369,8 @@ def main():
                         retirou += 1
                     x = coordenadas[0]
                     y = coordenadas[1]
+        if (status != 0):
+            break
                 
     MontaMatriz(matriz, x, y, p1, p2, 'cabo')
 
