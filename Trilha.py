@@ -425,13 +425,15 @@ def main():
                             if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
                                     if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
-                                       
+                    else:
+                        status = 2
+                        break                   
                                 
                             
         if(ord(c) == 99):
@@ -495,12 +497,15 @@ def main():
                             if(ehcombo(matriz, x, y, 'O')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |\n|                                                                               |')
                                     if(matriz[coordenadas[0]][coordenadas[1]] == 'X' and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                    elif():
+                        status = 1
+                        break
 
     ############################# Status #####################
     if (status==1):
