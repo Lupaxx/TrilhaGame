@@ -308,7 +308,7 @@ def main():
     combo2 = 0
     status = 0
     ### 1ª parte do jogo - posicionamento de peças
-    for i in range (4, -1, -1): #8
+    for i in range (8, -1, -1): #8
         jogada_valida = 0
         if (status == 2):
             break
