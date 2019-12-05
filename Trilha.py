@@ -65,6 +65,21 @@ def Vitoria(p):
     else:	
         os.system('clear')
 
+#############################  Checa se o jogador Venceu a partida  ###################################
+def CheckSeVitoria(matriz,p):
+    n = conta(matriz,p)
+
+    if (n<3):
+        if (p=="X"):
+            p="O"
+            Vitoria(p)
+        else:
+            p="X"
+            Vitoria(p)
+        return True
+    else:
+        return False
+
 ###############################  Monta Matriz  #################################
 def MontaMatriz(matriz, x, y, p1, p2, instrucoes): #Monta pra colocar no Tabuleiro
     tabuleiro = [" "]*7
@@ -160,6 +175,8 @@ def MoveSelect(matriz, x, y, p1, p2, instrucoes, c, enter): #Recebe uma tecla, r
             enter = 2
         else:
             MontaMatriz(matriz, x, y, p1, p2, instrucoes)
+    elif(ord(c) == 99): #c
+        enter = 3
             
 
     coordenadas = []
@@ -198,19 +215,6 @@ def conta(matriz, p):
                 cont +=1
     return cont
 
-#############################  Checa se o jogador Venceu a partida  ###################################
-def CheckSeVitoria(matriz,p):
-    n = conta(matriz,p)
-
-    if (n<3):
-        if (p=="X"):
-            p="O"
-            Vitoria(p)
-        else:
-            p="X"
-            Vitoria(p)
-        return 1
-
 ################################   É combo?   ###################################
 def ehcombo(matriz, x, y, p):
     combo = 0
@@ -232,7 +236,9 @@ def ehcombo(matriz, x, y, p):
                 combo += 1
             elif((i == 3) and (x ==3)):
                 break
-    if (combo == 3):
+        if(combo == 3):
+            return True
+    else:
         return True
     return False
 
@@ -244,7 +250,7 @@ def poderetirar (matriz, x, y, p):
         for i in range(7):
             for j in range(7):
                 #Tem umazinha fora de combo, tira essa n 
-                if (ehcombo(matriz, i, j, p) == False):
+                if (matriz[i][j] == p and ehcombo(matriz, i, j, p) == False):
                     return False
     #Faz não, pode tirar
     else:
@@ -302,7 +308,7 @@ def main():
     combo2 = 0
     status = 0
     ### 1ª parte do jogo - posicionamento de peças
-    for i in range (8, -1, -1):
+    for i in range (4, -1, -1): #8
         jogada_valida = 0
         if (status == 2):
             break
@@ -323,6 +329,10 @@ def main():
                 retirou = 0
                 while(retirou == 0):
                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                    if (coordenadas[2] == 2):
+                        jogada_valida = 1
+                        status = 2
+                        break
                     if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                         retirou += 1
@@ -335,7 +345,7 @@ def main():
         while(jogada_valida == 0): 
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[1])
             if (coordenadas[2] == 2):
-                status = 2
+                status = 1
                 break
             if(matriz[coordenadas[0]][coordenadas[1]] == " "):
                 matriz[coordenadas[0]][coordenadas[1]] = "O"
@@ -348,6 +358,10 @@ def main():
                 retirou = 0
                 while(retirou == 0):
                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                    if (coordenadas[2] == 2):
+                        jogada_valida = 1
+                        status = 1
+                        break
                     if((matriz[coordenadas[0]][coordenadas[1]] == 'X') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'X'))):
                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                         retirou += 1
@@ -362,7 +376,9 @@ def main():
 
     Posiciona[0] = "|       É a vez do jogador 1. Sua peça é 'X'. Escolha qual deseja mover.        |\n|                                                                               |"
     Posiciona[1] = "|       É a vez do jogador 2. Sua peça é 'O'. Escolha qual deseja mover.        |\n|                                                                               |"
-    selecionada = "|                 Peça selecioanada! Escolha para onde movê-la.                 |\n|                       Use 'C' para cancelar a seleção.                        |"
+    selecionada = []
+    selecionada.append("|                 Peça selecioanada! Escolha para onde movê-la.                 |\n|                       Use 'C' para cancelar a seleção.                        |")
+    selecionada.append("|    Peça selecioanada! Escolha para onde movê-la, pode ser qualquer lugar!      |\n|                       Use 'C' para cancelar a seleção.                        |")
     kb = Kbhit.KBHit()
     while (status == 0):
         c = 'a'
@@ -383,7 +399,7 @@ def main():
                 if(matriz[coordenadas[0]][coordenadas[1]] == "X"): #da pra mover?
                     if(conta(matriz, 'X') > 3):
                         if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
-                            MontaMatriz(matriz, x, y, p1, p2, selecionada)
+                            MontaMatriz(matriz, x, y, p1, p2, selecionada[0])
                             while(jogada_valida == 0):
                                 c = Hit()
                                 #W
@@ -420,17 +436,60 @@ def main():
                                         break
                                     else:
                                         MontaMatriz(matriz, x, y, p1, p2, instrucoes)
-                                elif(ord(c) == 99):
+                                elif(ord(c) == 99): #c
                                     break
                             if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    if (coordenadas[2] == 2):
+                                        jogada_valida = 1
+                                        status = 2
+                                        break
                                     if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                    #tem menos de 3 peças?
+                    else:
+                        a = x
+                        b = y
+                        matriz[x][y] = 'x'
+                        while (jogada_valida == 0):
+                            coordenadas = Selected(matriz, x, y, p1, p2, selecionada[1])
+                            x = coordenadas[0]
+                            y = coordenadas[1]
+                            if (coordenadas[2] == 2): #ff
+                                status = 2
+                                jogada_valida = 1
+                                break
+                            elif(coordenadas[2] == 3): #c
+                                matriz[a][b] = 'X'
+                                break
+                            elif(matriz[x][y] == ' '):
+                                matriz[a][b] = ' '
+                                matriz[x][y] = 'X'
+                                jogada_valida = 1
+                        if(ehcombo(matriz, x, y, 'X')):
+                                retirou = 0
+                                while(retirou == 0):
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    if (coordenadas[2] == 2):
+                                        jogada_valida = 1
+                                        status = 2
+                                        break
+                                    input(poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))
+                                    if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
+                                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                                        retirou += 1
+                                        jogada_valida = 1
+                                    x = coordenadas[0]
+                                    y = coordenadas[1]
+                        
+                        
+                        
+                        
                                        
                                 
                             
@@ -453,7 +512,7 @@ def main():
                 if(matriz[coordenadas[0]][coordenadas[1]] == "O"): #da pra mover?
                     if(conta(matriz, 'O') > 3):
                         if((CheckSeMove.W(matriz, x, y)) or (CheckSeMove.A(matriz, x, y)) or (CheckSeMove.S(matriz, x, y)) or (CheckSeMove.D(matriz, x, y))):
-                            MontaMatriz(matriz, x, y, p1, p2, selecionada)
+                            MontaMatriz(matriz, x, y, p1, p2, selecionada[0])
                             while(jogada_valida == 0):
                                 c = Hit()
                                 #W
@@ -485,7 +544,7 @@ def main():
                                     MontaMatriz(matriz, x, y, p1, p2, instrucoes)
                                 elif(ord(c) == 102): #ff
                                     if (MenuAbandono.MenuAbandono()):
-                                        status = 2
+                                        status = 1
                                         jogada_valida = 2
                                         break
                                     else:
@@ -496,63 +555,54 @@ def main():
                                 retirou = 0
                                 while(retirou == 0):
                                     coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                                    if (coordenadas[2] == 2):
+                                        jogada_valida = 1
+                                        status = 1
+                                        break
                                     if(matriz[coordenadas[0]][coordenadas[1]] == 'X' and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                    #tem menos de 3 peças?
+                    else:
+                        a = x
+                        b = y
+                        matriz[x][y] = 'o'
+                        while (jogada_valida == 0):
+                            coordenadas = Selected(matriz, x, y, p1, p2, selecionada[1])
+                            x = coordenadas[0]
+                            y = coordenadas[1]
+                            if (coordenadas[2] == 2): #ff
+                                status = 2
+                                jogada_valida = 1
+                                break
+                            elif(coordenadas[2] == 3): #c
+                                matriz[a][b] = 'O'
+                                break
+                            elif(matriz[x][y] == ' '):
+                                matriz[a][b] = ' '
+                                matriz[x][y] = 'O'
+                                jogada_valida = 1
+                        if(ehcombo(matriz, x, y, 'O')):
+                                retirou = 0
+                                while(retirou == 0):
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    if (coordenadas[2] == 2):
+                                        jogada_valida = 1
+                                        status = 2
+                                        break
+                                    if((matriz[coordenadas[0]][coordenadas[1]] == 'X') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'X'))):
+                                        matriz[coordenadas[0]][coordenadas[1]] = ' '
+                                        retirou += 1
+                                        jogada_valida = 1
+                                    x = coordenadas[0]
+                                    y = coordenadas[1]
+                        
 
     ############################# Status #####################
     if (status==1):
         Vitoria("X")
     elif(status==2):
         Vitoria("O")
-
-#################################  Tela de vitória  ###################################
-def Vitoria(p):
-    if os.name == 'nt':
-        os.system('cls')
-    else:	
-        os.system('clear')
-
-    if (p=="X"):
-        arquivo = open("VitoriaP1.txt", "r", encoding='utf-8')
-        print (arquivo.read())
-    else:
-        arquivo = open("VitoriaP2.txt", "r", encoding='utf-8')
-        print (arquivo.read())
-
-    kb = Kbhit.KBHit()
-    z = 0
-    if(os.name == 'nt'):
-        while (z == 0):
-            if kb.kbhit():
-                c = kb.getch()
-                z = 1
-    else:
-        while (z == 0):
-            c = getkey()
-            z = 1
-    if os.name == 'nt':
-        os.system('cls')
-    else:	
-        os.system('clear')
-
-#############################  Checa se o jogador Venceu a partida  ###################################
-def CheckSeVitoria(matriz,p):
-    n = conta(matriz,p)
-
-    if (n<3):
-        if (p=="X"):
-            p="O"
-            Vitoria(p)
-        else:
-            p="X"
-            Vitoria(p)
-        return True
-    else:
-        return False
-
-
-
                                 
