@@ -317,6 +317,7 @@ def main():
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[0])
             if (coordenadas[2] == 2):
                 status = 2
+                jogada_valida = 1
                 break
             if(matriz[coordenadas[0]][coordenadas[1]] == " "): #da pra colocar ali?
                 matriz[coordenadas[0]][coordenadas[1]] = "X"
@@ -328,7 +329,7 @@ def main():
             if(ehcombo(matriz, x, y, 'X')):
                 retirou = 0
                 while(retirou == 0):
-                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
                     if (coordenadas[2] == 2):
                         jogada_valida = 1
                         status = 2
@@ -346,6 +347,7 @@ def main():
             coordenadas = Selected(matriz, x, y, p1, p2, Posiciona[1])
             if (coordenadas[2] == 2):
                 status = 1
+                jogada_valida = 1
                 break
             if(matriz[coordenadas[0]][coordenadas[1]] == " "):
                 matriz[coordenadas[0]][coordenadas[1]] = "O"
@@ -357,7 +359,7 @@ def main():
             if(ehcombo(matriz, x, y, 'O')):
                 retirou = 0
                 while(retirou == 0):
-                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |\n|                                                                               |')
                     if (coordenadas[2] == 2):
                         jogada_valida = 1
                         status = 1
@@ -441,7 +443,7 @@ def main():
                             if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 2
@@ -451,6 +453,8 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                                    if(conta(matriz, 'O') == 2):
+                                        status = 1
                     #tem menos de 3 peças?
                     else:
                         a = x
@@ -474,18 +478,19 @@ def main():
                         if(ehcombo(matriz, x, y, 'X')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 2
                                         break
-                                    input(poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))
                                     if((matriz[coordenadas[0]][coordenadas[1]] == 'O') and (poderetirar (matriz, coordenadas[0], coordenadas[1], 'O'))):
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                         jogada_valida = 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                                    if(conta(matriz, 'O') == 2):
+                                        status = 1
                         
                         
                         
@@ -554,7 +559,7 @@ def main():
                             if(ehcombo(matriz, x, y, 'O')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 1 para retirar      |\n|                                                                               |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 1
@@ -564,6 +569,8 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                                    if(conta(matriz, 'X') == 2):
+                                        status = 2
                     #tem menos de 3 peças?
                     else:
                         a = x
@@ -587,7 +594,7 @@ def main():
                         if(ehcombo(matriz, x, y, 'O')):
                                 retirou = 0
                                 while(retirou == 0):
-                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |')
+                                    coordenadas = Selected (matriz, x, y, p1, p2, '|      Boa! Você pontuou! Agora escolha uma peça do jogador 2 para retirar      |\n|                                                                               |')
                                     if (coordenadas[2] == 2):
                                         jogada_valida = 1
                                         status = 2
@@ -598,6 +605,8 @@ def main():
                                         jogada_valida = 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
+                                    if(conta(matriz, 'X') == 2):
+                                        status = 2
                         
 
     ############################# Status #####################
