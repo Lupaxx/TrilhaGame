@@ -430,11 +430,7 @@ def main():
                                         matriz[coordenadas[0]][coordenadas[1]] = ' '
                                         retirou += 1
                                     x = coordenadas[0]
-                                    y = coordenadas[1]
-                    else:
-                        status = 2
-                        break                   
-                                
+                                    y = coordenadas[1]                                   
                             
         if(ord(c) == 99):
             break
@@ -503,9 +499,6 @@ def main():
                                         retirou += 1
                                     x = coordenadas[0]
                                     y = coordenadas[1]
-                    elif():
-                        status = 1
-                        break
 
     ############################# Status #####################
     if (status==1):
