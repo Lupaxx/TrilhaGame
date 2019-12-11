@@ -4,69 +4,69 @@ Tutorial:
     voltar para o tutorial!
                                        Descrição:                                   
     
-    O jogo de Trilha tem dois participantes, que usam um tabuleiro para jogar.
-    
-    Jogadores - 2
-    Peças - 18 peças sendo 9 brancas e 9 pretas.
-    Tabuleiro - tabuleiro com 24 casa interligados horizontalmente e verticalmente.
-    Objetivo - Deixar o adversário com 2 peças no tabuleiro ou deixá-lo sem movimentos.
+    Jogadores - 2;
+    Peças - 18 peças sendo 9 'X' e 9 'O';
+    Tabuleiro - tabuleiro com 24 casas interligadas horizontalmente e verticalmente;
+    Objetivo - Deixar o adversário com 2 peças no tabuleiro ou deixá-lo sem nenhuma jogada válida.
 
 					Mecânica:
+
 	Serão usadas as teclas W, A, S e D para movimentação:
-    W - Vai para a posição de cima
-    S - Vai para a posição de baixo
-    A - Vai para a posisção da esquerda
-    D - Vai para a posição da direita
+    W - Vai para a posição de cima;
+    S - Vai para a posição de baixo;
+    A - Vai para a posisção da esquerda;
+    D - Vai para a posição da direita.
     obs: Se observar, a posição das teclas juntas e suas funções formam algo como 
-    as setas do teclado
+    as setas do teclado.
 	No menu so serão usadas as teclas W e A, já que as unicas opções são a 
     movimentação para cima e para baixo.
 	Você pode mover até que seja apertada a tecla espaço, que confirmará a 
-    seleção do lugar em que está o > <
-	A movimentação se orienta a partir dos caractecteres > e < em volta da opção. 
-    No menu, aparecerá ">tutorial<", o que quer dizer que o tutorial está atualmente 
-    selecionado e será aberto caso precione a tecla espaço. Ja no jogo em si, todas 
-    as casas do tabuleiro começam marcadas com ( ), tirando por uma, que é > <. Esta 
-    é a que está atualmente selecionada e sua peça será posta ali caso aperte a tecla 
+    seleção do lugar em que está o "> <" .
+	A movimentação se orienta a partir dos caractecteres '>' e '<' em volta da opção. 
+    No menu, aparecerá ">tutorial<"(exemplo), o que quer dizer que o tutorial está atualmente 
+    selecionado e será aberto caso precione a tecla espaço. Já no jogo em si, todas 
+    as casas do tabuleiro começam marcadas com "( )", tirando por uma, que é "> <". Esta 
+    é a que está atualmente selecionada e, assim, sua peça será posta ali ou a peça do adversário será retirada (dependendo da circunstância do jogo) caso aperte a tecla 
     espaço.
-
+	Serão usadas as teclas F e ? para, respectivamente, abadonar a partida e abrir o tutorial.
+		lembrete: estas teclas funcionaram somente durante a partida.
+    obs: Certifiqui-se que o Caps lock esta desativado para um bom funcionamento do jogo.
+ 
                                      O Jogo Trilha:                                 
     
-    O jogo consiste em tres partes principais:
+    O jogo consiste em duas partes principais:
     
-        Colocando as peças: Esta é a fase inicial do jogo onde cada jogador coloca
-    um peça de cada vez alternando entre jogadores, caso um dos jogadores forme uma
-    linha horizontal ou vertical com três peças (um moinho), ele terá o direito de
-    remover uma peça de seu adversário do tabuleiro, caso essa peça não faça parte
-    de um combo, Mas caso so hajam peças fazendo parte de um combo, você poderá 
-    retira-lá.
-        Movendo as peças: Esta fase se inicia quando ambos os jogadores colocarem
-    suas nove peças em jogo. Consiste em mover suas peças ao longo de uma das linhas
-    do tabuleiro para uma outra casa adjacente. Caso um dos jogadores tenha somente
-    3 peças em jogo, ele pode "voar" com suas peças, podendo mover para qualquer
-    casa que não esteja ocupada por uma peça do adversário.
-        Removendo peças adversárias: Em qualquer uma das fases acima quando um
-    jogador forma uma linha horizontal ou vertical com 3 peças ele fará um "moinho",
-    isso lhe dá o direito de remover uma peça de seu adversário, contudo você não
-    poderá remover uma peça do seu adversário que faz parte de um moinho dele, a não
-    ser que não exista outra peça para remover.
+        1ª) Colocando as peças: Esta é a fase inicial do jogo onde cada jogador dispõe
+    alternadamente uma peça por vez no tabuleiro até que todas sejam alocadas. Durante
+    essa etapa, os dois jogadores terão a possibilidade de formar Combos*.
+
+        *Combo(s): Ocorre quando um dos jogadores forma uma linha horizontal ou vertical com três
+    peças, neste caso, ele terá o direito de retirar uma peça de seu adversário do
+    tabuleiro. Uma peça adversária não poderá ser retirada caso esta esteja em formação
+    de combo, exceto quando todas as peças adversárias estejam nessa situação. Neste
+    caso, não há restrições de peças a serem retiradas.
+
+        2ª) Movendo as peças: Esta fase se inicia quando ambos os jogadores acabam de
+    alocar suas nove peças em jogo. A fase consiste em mover suas peças ao longo de
+    uma das linhas do tabuleiro de uma casa para outra adjacente. Caso um dos jogadores
+    tenha somente 3 peças em jogo, ele poderá "voar" com suas peças, podendo movê-las não
+    mais somente para casas adjacentes mas para qualquer casa disponível no tabuleiro.
     
                                       Estratégia:                                   
                                       
         No começo do jogo, é muito importante colocar as peças nos lugares mais
-    versáteis para tentar formar imediatamente moinhos e não cometer o erro de
-    concentrar as peças próprias em uma área do tabuleiro.
+    versáteis para tentar formar imediatamente combos e não cometer o erro de
+    concentrar as peças próprias em uma área do tabuleiro, o que pode aumentar as chances de ser bloqueado.
         Uma posição ideal, que geralmente resulta em uma vitória, é ser capaz de colocar
-    uma peça que possa se movimentar entre dois moinhos diferentes. 
+    uma peça que possa se movimentar entre dois combos diferentes! 
     
-                                     Fim da Partida:                                 
+                                     Fim da partida:                                 
                                      
-    O jogo termina quando 3 situações são alcançadas:
+    O jogador vence a partida quando uma das 3 situações é alcançada:
     
-        Se um jogador reduzir as peças de seu adversário para 2.
-        Se um jogador deixar seu adversário sem nenhuma jogada válida. Caso seu
-    adversário tenha somente 3 peças em jogo, ele não poderá ser "trancado".
-        Se ambos jogadores estiverem com 3 peças em jogo e, a partir deste momento, se
-    em 10 jogadas não houver vencedor, o jogo terminará e será declarado um empate.
-    
+        A) um adversário tem suas peças reduzidas à 2;
+        B) um adversário ficar sem nenhuma jogada válida; 
+		lembtre:Caso seu jogador tenha somente 3 peças em jogo, ele não poderá ser bloqueado.
+    	C) um adversário abandonar a partida.
+
     *************** Precione qualquer tecla para voltar ao menu inicial. ***************
