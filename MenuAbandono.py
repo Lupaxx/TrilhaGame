@@ -104,8 +104,9 @@ def SelectedMenuAbandono (vetor_menu_abandono, x): #Responde ao input, seleciona
                 
     else:
         while (z == 0):
-            c = getkey()
-            x,z = MoveMenuAbandono(vetor_menu_abandono, x, c, z)
+            if kb.kbhit():
+                c = getkey()
+                x,z = MoveMenuAbandono(vetor_menu_abandono, x, c, z)
             
     return x
 
