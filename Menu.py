@@ -25,7 +25,7 @@ def Help():
                 z = 1
     else:
         while (z == 0):
-            c = getkey()
+            c = kb.getkey()
             z = 1
     if os.name == 'nt':
         os.system('cls')
@@ -134,7 +134,7 @@ def SelectedMenu (vetor_menu, x): #Responde ao input, seleciona um lugar do tabu
                     x,z = MoveMenu(vetor_menu, x, c, z)
         else:
             while (z == 0):
-                c = getkey()
+                c = kb.getkey()
                 x,z = MoveMenu(vetor_menu, x, c, z)
                 
         return x
