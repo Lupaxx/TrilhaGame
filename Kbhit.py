@@ -18,19 +18,7 @@ else:
     TERMIOS = termios
     import atexit
     from select import select
-    def getkey():
-        fd = sys.stdin.fileno()
-        new = termios.tcgetattr(fd)
-        new[3] = new[3] & ~TERMIOS.ICANON & ~TERMIOS.ECHO
-        new[6][TERMIOS.VMIN] = 1
-        new[6][TERMIOS.VTIME] = 0
-        termios.tcsetattr(fd, TERMIOS.TCSANOW, new)
-        c = None
-        try:
-            c = os.read(fd, 1)
-        finally:
-            return (str(c)[2])
-
+    
 class KBHit:
 
     def set_normal_term(self):
@@ -68,3 +56,16 @@ class KBHit:
         else:
             dr,dw,de = select([sys.stdin], [], [], 0)
             return dr != []
+            
+    def getkey():
+        fd = sys.stdin.fileno()
+        new = termios.tcgetattr(fd)
+        new[3] = new[3] & ~TERMIOS.ICANON & ~TERMIOS.ECHO
+        new[6][TERMIOS.VMIN] = 1
+        new[6][TERMIOS.VTIME] = 0
+        termios.tcsetattr(fd, TERMIOS.TCSANOW, new)
+        c = None
+        try:
+            c = os.read(fd, 1)
+        finally:
+            return (str(c)[2])
