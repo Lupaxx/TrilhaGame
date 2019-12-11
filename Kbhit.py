@@ -56,8 +56,8 @@ class KBHit:
         else:
             dr,dw,de = select([sys.stdin], [], [], 0)
             return dr != []
-            
-    def getkey():
+
+    def getkey(self):
         fd = sys.stdin.fileno()
         new = termios.tcgetattr(fd)
         new[3] = new[3] & ~TERMIOS.ICANON & ~TERMIOS.ECHO
