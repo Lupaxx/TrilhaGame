@@ -28,9 +28,8 @@ def Help():
                 z = 1
     else:
         while (z == 0):
-            if kb.kbhit():
-                c = getkey()
-                z = 1
+            c = getkey()
+            z = 1
     if os.name == 'nt':
         os.system('cls')
     else:	
@@ -59,9 +58,8 @@ def Vitoria(p):
                 z = 1
     else:
         while (z == 0):
-            if kb.kbhit():
-                c = getkey()
-                z = 1
+            c = getkey()
+            z = 1
     if os.name == 'nt':
         os.system('cls')
     else:	
@@ -106,8 +104,7 @@ def Hit():
                 c = kb.getch()
     else:
         while (c == 'q'):
-            if kb.kbhit():
-                c = getkey()
+            c = getkey()
 
     return c
 
