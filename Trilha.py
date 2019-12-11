@@ -16,7 +16,7 @@ def Help():
         os.system('cls')
     else:	
         os.system('clear')
-    arquivo = open("tutorial.txt", "r")
+    arquivo = open("tutorial.txt", "r", encoding='utf-8')
     print (arquivo.read())
     
     kb = Kbhit.KBHit()
